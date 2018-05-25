@@ -30,11 +30,11 @@ namespace PDFIndexer
 
             if (detailed)
             {
-                MyCustomListener listener = new MyCustomListener();
-                var parser = new PdfCanvasProcessor(listener);
-                parser.ProcessPageContent(pdfDoc.GetFirstPage());
+                //MyCustomListener listener = new MyCustomListener();
+                //var parser = new PdfCanvasProcessor(listener);
+                //parser.ProcessPageContent(pdfDoc.GetFirstPage());
 
-                BlockPage bp = listener.GetResults();
+                //BlockPage bp = listener.GetResults();
 
 
 
