@@ -34,5 +34,6 @@ namespace PDFIndexer.Base
 
         public float GetHeight() => Block.GetHeight();
 
-        public float GetWordSpacing() => Block.GetWordSpacing();   }    
+        public float GetWordSpacing() => Block.GetWordSpacing();
+    }    
 }

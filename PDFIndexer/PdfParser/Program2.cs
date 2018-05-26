@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace PDFIndexer
 {
-    public class Program
+    public class Program2
     {
         public static void Main(string[] args)
         {

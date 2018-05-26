@@ -8,6 +8,9 @@ using PDFIndexer.TextStructures;
 using PDFIndexer.Execution;
 using PDFIndexer.PDFText;
 using PDFIndexer.PDFCore;
+using System.Drawing;
+using PDFIndexer.PdfParser.TextStructures;
+using PDFIndexer.PdfParser.PDFCore;
 
 namespace ConsoleApp1
 {
@@ -18,13 +21,8 @@ namespace ConsoleApp1
             string path = @"C:\Users\lucas\Desktop\IBAgro\BLOG - ARTIGO NÚMERO 05 - BANANA PASSA.pdf";
 
 
-            BasicFirstPageStats.Reset();
-            PdfReaderException.ContinueOnException();
-
-            Pipeline pipeline = new Pipeline();
-
-
-
+            TextExtractor te = new TextExtractor();
+            var list = te.Extract(path, true);
 
             Console.ReadKey();
         }
