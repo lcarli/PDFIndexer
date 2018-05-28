@@ -13,7 +13,7 @@ Useful and easy way to get text from pdf (including metadata)
 ## How to use ##
 
 To use:
-```
+``` CSharp
             string path = "path with my pdf"
             TextExtractor te = new TextExtractor();
             var list = te.ExtractLinesMetadata(path);
