@@ -32,7 +32,7 @@ namespace PDFIndexer.PDFCore
             TabStop = tabstop;
         }
 
-        void SetupPage(BlockPage page)
+        public void SetupPage(BlockPage page)
         {
             if (Global != null)
                 return;                

@@ -16,6 +16,7 @@ namespace PDFIndexer.TextStructures
             foreach (var bset in page.AllBlocks)
             {                
                 var blockArea = bset as IBlockSet<IBlock>;
+
                 var pageInfo = new TextPageInfo()
                 {
                     PageNumber = pageNumber,

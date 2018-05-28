@@ -10,53 +10,71 @@ using iText.Kernel.Pdf.Canvas.Parser.Data;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using System.Linq;
 using iText.IO.Font;
+using PDFIndexer.Execution;
+using PDFIndexer.PdfParser.TextStructures;
+using PDFIndexer.PDFText;
+using PDFIndexer.PdfParser.PDFCore;
+using PDFIndexer.Base;
+using PDFIndexer.PDFCore;
+using PDFIndexer.Parser;
+using PDFIndexer.TextStructures;
 
 namespace PDFIndexer
 {
-    public class TextExtractor
-    { 
-        public PdfMetadata Extract(string path, bool detailed = false)
+    class TextExtractor
+    {
+        public Pipeline pipeline;
+        public TextExtractor()
+        {
+            pipeline = new Pipeline();
+            PdfReaderException.ContinueOnException();
+        }
+
+        public string ExtractFullText(string path)
         {
             PdfDocument pdfDoc = new PdfDocument(new PdfReader(path));
-
             int countPages = pdfDoc.GetNumberOfPages();
-
             StringBuilder completeText = new StringBuilder();
             for (int i = 1; i < countPages + 1; i++)
             {
                 PdfPage p = pdfDoc.GetPage(i);
                 completeText.Append(PdfTextExtractor.GetTextFromPage(p));
             }
-
-            if (detailed)
-            {
-                //MyCustomListener listener = new MyCustomListener();
-                //var parser = new PdfCanvasProcessor(listener);
-                //parser.ProcessPageContent(pdfDoc.GetFirstPage());
-
-                //BlockPage bp = listener.GetResults();
-
-
-
-                return new PdfMetadata
-                {
-                    Text = completeText.ToString(),
-                    Lines = null,
-                    Words = null
-                };
-            }
-            else
-            { 
-                return new PdfMetadata
-                {
-                    Text = completeText.ToString(),
-                    Lines = null,
-                    Words = null
-                };
-            }
+            return completeText.ToString();
         }
 
-        public async Task<PdfMetadata> Extract(Stream stream, bool detailed = false)
+        public async Task<string> ExtractFullText(Stream stream)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "file");
+
+            using (var Filestream = new FileStream(path, FileMode.Create))
+            {
+                await stream.CopyToAsync(Filestream);
+
+            }
+            PdfDocument pdfDoc = new PdfDocument(new PdfReader(path));
+            int countPages = pdfDoc.GetNumberOfPages();
+            StringBuilder completeText = new StringBuilder();
+            for (int i = 1; i < countPages + 1; i++)
+            {
+                PdfPage p = pdfDoc.GetPage(i);
+                completeText.Append(PdfTextExtractor.GetTextFromPage(p));
+            }
+            return completeText.ToString();
+        }
+
+        public List<PdfMetadata> ExtractWordsMetadata(string path, bool detailed = false)
+        {
+            var result = pipeline.Input(path)
+                                .AllPages<CreateWordBlock>(page =>
+                                    page.ParsePdf<ProcessPdfText>()
+                                        .ParseBlock<GroupWords>()
+                                    );
+            var conteudo = result.ToList();
+            return ConvertTextLineToMetadata(ConvertToTextLine2(conteudo));
+        }
+
+        public async Task<List<PdfMetadata>> ExtractWordsMetadata(Stream stream, bool detailed = false)
         {
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), "file");
@@ -66,35 +84,80 @@ namespace PDFIndexer
                 await stream.CopyToAsync(Filestream);
             }
 
+            var result = pipeline.Input(path)
+                                .AllPages<CreateWordBlock>(page =>
+                                    page.ParsePdf<ProcessPdfText>()
+                                        .ParseBlock<GroupWords>()
+                                    );
+            var conteudo = result.ToList();
+            return ConvertTextLineToMetadata(ConvertToTextLine2(conteudo));
+        }
 
-            PdfDocument pdfDoc = new PdfDocument(new PdfReader(path));
+        public List<PdfMetadata> ExtractLinesMetadata(string path, bool detailed = false)
+        {
+            var result = pipeline.Input(path)
+                                .AllPages<CreateWordBlock>(page =>
+                                    page.ParsePdf<ProcessPdfText>()
+                                        .ParseBlock<GroupLines>()
+                                    );
 
-            if (detailed)
+            var conteudo = result.ConvertText<CreateTextLineIndex, TextLine>()
+                                .ConvertText<PreCreateStructures, TextLine2>()
+                                .ToList();
+
+
+
+            return ConvertTextLineToMetadata(conteudo);
+        }
+
+        public async Task<List<PdfMetadata>> ExtractLinesMetadata(Stream stream, bool detailed = false)
+        {
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "file");
+
+            using (var Filestream = new FileStream(path, FileMode.Create))
             {
-                return new PdfMetadata
-                {
-                    Text = ""
-                };
+                await stream.CopyToAsync(Filestream);
             }
-            else
+
+            var result = pipeline.Input(path)
+                                .AllPages<CreateWordBlock>(page =>
+                                    page.ParsePdf<ProcessPdfText>()
+                                        .ParseBlock<GroupLines>()
+                                    );
+            var conteudo = result.ConvertText<CreateTextLineIndex, TextLine>()
+                                 .ConvertText<PreCreateStructures, TextLine2>()
+                                 .ToList();
+
+            return ConvertTextLineToMetadata(conteudo);
+        }
+
+        private List<PdfMetadata> ConvertTextLineToMetadata(IList<TextLine2> list)
+        {
+            List<PdfMetadata> metadataList = new List<PdfMetadata>();
+            foreach (var item in list)
             {
-                int countPages = pdfDoc.GetNumberOfPages();
-
-                StringBuilder completeText = new StringBuilder();
-                for (int i = 1; i < countPages + 1; i++)
+                var metadataItem = new PdfMetadata
                 {
-                    PdfPage p = pdfDoc.GetPage(i);
-                    completeText.Append(PdfTextExtractor.GetTextFromPage(p));
-                }
-                pdfDoc.Close();
-
-                return new PdfMetadata
-                {
-                    Text = completeText.ToString(),
-                    Lines = null,
-                    Words = null
+                    Text = item.GetText(),
+                    X = item.GetX(),
+                    Y = item.GetH(),
+                    Width = item.GetWidth(),
+                    Height = item.GetHeight()
                 };
-            };
+                metadataList.Add(metadataItem);
+            }
+            return metadataList;
+        }
+
+        private List<TextLine2> ConvertToTextLine2(IList<TextLine> oldList)
+        {
+            List<TextLine2> newList = new List<TextLine2>();
+            foreach (var item in oldList)
+            {
+                newList.Add(new TextLine2(item));
+            }
+            return newList;
         }
     }
 }
