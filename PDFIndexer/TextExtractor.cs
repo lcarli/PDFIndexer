@@ -22,13 +22,47 @@ using PDFIndexer.TextStructures;
 namespace PDFIndexer
 {
     class TextExtractor
-    { 
+    {
         public Pipeline pipeline;
         public TextExtractor()
         {
             pipeline = new Pipeline();
             PdfReaderException.ContinueOnException();
         }
+
+        public string ExtractFullText(string path)
+        {
+            PdfDocument pdfDoc = new PdfDocument(new PdfReader(path));
+            int countPages = pdfDoc.GetNumberOfPages();
+            StringBuilder completeText = new StringBuilder();
+            for (int i = 1; i < countPages + 1; i++)
+            {
+                PdfPage p = pdfDoc.GetPage(i);
+                completeText.Append(PdfTextExtractor.GetTextFromPage(p));
+            }
+            return completeText.ToString();
+        }
+
+        public async Task<string> ExtractFullText(Stream stream)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "file");
+
+            using (var Filestream = new FileStream(path, FileMode.Create))
+            {
+                await stream.CopyToAsync(Filestream);
+
+            }
+            PdfDocument pdfDoc = new PdfDocument(new PdfReader(path));
+            int countPages = pdfDoc.GetNumberOfPages();
+            StringBuilder completeText = new StringBuilder();
+            for (int i = 1; i < countPages + 1; i++)
+            {
+                PdfPage p = pdfDoc.GetPage(i);
+                completeText.Append(PdfTextExtractor.GetTextFromPage(p));
+            }
+            return completeText.ToString();
+        }
+
         public List<PdfMetadata> ExtractWordsMetadata(string path, bool detailed = false)
         {
             var result = pipeline.Input(path)
