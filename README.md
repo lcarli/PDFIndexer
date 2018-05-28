@@ -1,16 +1,27 @@
-# PDFIndexer
+PDFIndexer
+===============
+
 
 Useful and easy way to get text from pdf (including metadata)
 
+
+# Architecture #
+
+ * Creating a Nuget pack, yet.
+
+
+## How to use ##
+
 To use:
-'''
+```
+            string path = "path with my pdf"
             TextExtractor te = new TextExtractor();
-            var list = te.ExtractLinesMetadata(path, true);
-'''
+            var list = te.ExtractLinesMetadata(path);
+```
 
 
 
-Methods:
+## Methods ##
 
 ExtractFullText -> Extract full text as a single string
 
