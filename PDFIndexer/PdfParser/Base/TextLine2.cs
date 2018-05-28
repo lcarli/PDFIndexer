@@ -26,7 +26,7 @@ namespace PDFIndexer.Base
             this.AfterSpace = old.AfterSpace;
         }
 
-        public TextLine2() { };
+        public TextLine2() { }
         
     }
 }

@@ -107,7 +107,7 @@ namespace PDFIndexer
                 {
                     Text = item.GetText(),
                     X = item.GetX(),
-                    H = item.GetH(),
+                    Y = item.GetH(),
                     Width = item.GetWidth(),
                     Height = item.GetHeight()
                 };
