@@ -74,7 +74,7 @@ namespace PDFIndexer
             return ConvertTextLineToMetadata(ConvertToTextLine2(conteudo));
         }
 
-        public async Task<List<PdfMetadata>> ExtractWordsMetadata(Stream stream, bool detailed = false)
+        public async Task<List<PdfMetadata>> ExtractWordsMetadata(Stream stream)
         {
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), "file");
@@ -93,7 +93,7 @@ namespace PDFIndexer
             return ConvertTextLineToMetadata(ConvertToTextLine2(conteudo));
         }
 
-        public List<PdfMetadata> ExtractLinesMetadata(string path, bool detailed = false)
+        public List<PdfMetadata> ExtractLinesMetadata(string path)
         {
             var result = pipeline.Input(path)
                                 .AllPages<CreateWordBlock>(page =>
@@ -110,7 +110,7 @@ namespace PDFIndexer
             return ConvertTextLineToMetadata(conteudo);
         }
 
-        public async Task<List<PdfMetadata>> ExtractLinesMetadata(Stream stream, bool detailed = false)
+        public async Task<List<PdfMetadata>> ExtractLinesMetadata(Stream stream)
         {
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), "file");
