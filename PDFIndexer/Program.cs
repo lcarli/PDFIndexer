@@ -22,7 +22,7 @@ namespace ConsoleApp1
 
 
             TextExtractor te = new TextExtractor();
-            var list = te.Extract(path, true);
+            var list = te.ExtractLinesMetadata(path, true);
 
             Console.ReadKey();
         }
