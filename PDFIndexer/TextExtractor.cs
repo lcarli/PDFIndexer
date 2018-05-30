@@ -52,18 +52,10 @@ namespace PDFIndexer
                 await stream.CopyToAsync(Filestream);
 
             }
-            PdfDocument pdfDoc = new PdfDocument(new PdfReader(path));
-            int countPages = pdfDoc.GetNumberOfPages();
-            StringBuilder completeText = new StringBuilder();
-            for (int i = 1; i < countPages + 1; i++)
-            {
-                PdfPage p = pdfDoc.GetPage(i);
-                completeText.Append(PdfTextExtractor.GetTextFromPage(p));
-            }
-            return completeText.ToString();
+            return ExtractFullText(path);
         }
 
-        public List<PdfMetadata> ExtractWordsMetadata(string path, bool detailed = false)
+        public List<PdfMetadata> ExtractWordsMetadata(string path)
         {
             var result = pipeline.Input(path)
                                 .AllPages<CreateWordBlock>(page =>
@@ -83,14 +75,7 @@ namespace PDFIndexer
             {
                 await stream.CopyToAsync(Filestream);
             }
-
-            var result = pipeline.Input(path)
-                                .AllPages<CreateWordBlock>(page =>
-                                    page.ParsePdf<ProcessPdfText>()
-                                        .ParseBlock<GroupWords>()
-                                    );
-            var conteudo = result.ToList();
-            return ConvertTextLineToMetadata(ConvertToTextLine2(conteudo));
+            return ExtractWordsMetadata(path);
         }
 
         public List<PdfMetadata> ExtractLinesMetadata(string path)
@@ -120,16 +105,7 @@ namespace PDFIndexer
                 await stream.CopyToAsync(Filestream);
             }
 
-            var result = pipeline.Input(path)
-                                .AllPages<CreateWordBlock>(page =>
-                                    page.ParsePdf<ProcessPdfText>()
-                                        .ParseBlock<GroupLines>()
-                                    );
-            var conteudo = result.ConvertText<CreateTextLineIndex, TextLine>()
-                                 .ConvertText<PreCreateStructures, TextLine2>()
-                                 .ToList();
-
-            return ConvertTextLineToMetadata(conteudo);
+            return ExtractLinesMetadata(path);
         }
 
         private List<PdfMetadata> ConvertTextLineToMetadata(IList<TextLine2> list)
@@ -158,6 +134,27 @@ namespace PDFIndexer
                 newList.Add(new TextLine2(item));
             }
             return newList;
+        }
+
+        public async Task<IndexMetadata> GetIndexMetadata(Stream stream)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "file");
+
+            using (var Filestream = new FileStream(path, FileMode.Create))
+            {
+                await stream.CopyToAsync(Filestream);
+            }
+
+            return GetIndexMetadata(path);
+        }
+
+        public IndexMetadata GetIndexMetadata(string path)
+        {
+            var _listOfLines = ExtractLinesMetadata(path);
+            var _listOfWords = ExtractWordsMetadata(path);
+            var _text = ExtractFullText(path);
+
+            return new IndexMetadata(_text, _listOfLines, _listOfWords);
         }
     }
 }
