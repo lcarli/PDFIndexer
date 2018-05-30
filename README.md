@@ -25,9 +25,11 @@ To use:
 
 ExtractFullText -> Extract full text as a single string
 
-ExtractWordsMetadata -> Extract every single word with metadata (text, Point X, Poin Y, Width and Height)
+ExtractWordsMetadata -> Extract every single word with metadata (text, Point X, Point Y, Width and Height)
 
-ExtractLinesMetada -> Extract every single word with metadata (text, Point X, Poin Y, Width and Height)
+ExtractLinesMetada -> Extract every single word with metadata (text, Point X, Point Y, Width and Height)
+
+GeIndexMetadata -> To create a hOCR or other xml pattern page, we have this class with all text and points of every line and word.
 
 
 In all cases you can use string or stream to pass the pdf document.
@@ -69,5 +71,41 @@ In all cases you can use string or stream to pass the pdf document.
     Y = 88.45
     Width = 12.2
     Height = 11.82
+}
+```
+
+### GetIndexMetadata ###
+``` CSharp
+{
+    Text = "some text of entire line"
+    ListOfLines = 
+    [ 
+        {
+        Text = "some text of entire line"
+        X = 150.233
+        Y = 88.45
+        Width = 12.2
+        Height = 11.82
+        },
+        ... 
+    ]
+    ListOfWords = 
+    [
+        {
+            Text = "some"
+            X = 150.233
+            Y = 88.45
+            Width = 12.2
+            Height = 11.82
+        }
+
+        {
+            Text = "text"
+            X = 170.233
+            Y = 88.45
+            Width = 12.2
+            Height = 11.82
+        }
+    ]
 }
 ```
