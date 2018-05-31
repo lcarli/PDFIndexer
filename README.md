@@ -51,7 +51,11 @@ In all cases you can use string or stream to pass the pdf document.
         Y = 88.45
         Width = 12.2
         Height = 11.82
-    }
+        PageInfo =  {
+                        PageNumber = 1,
+                        BlobkId = 0
+                    }
+}
 
     {
         Text = "text"
@@ -59,6 +63,10 @@ In all cases you can use string or stream to pass the pdf document.
         Y = 88.45
         Width = 12.2
         Height = 11.82
+        PageInfo =  {
+                        PageNumber = 1,
+                        BlobkId = 1
+                    }
     }
 ]
 ```
@@ -71,6 +79,10 @@ In all cases you can use string or stream to pass the pdf document.
     Y = 88.45
     Width = 12.2
     Height = 11.82
+    PageInfo =  {
+                    PageNumber = 1,
+                    BlobkId = 0
+                }
 }
 ```
 
@@ -81,11 +93,15 @@ In all cases you can use string or stream to pass the pdf document.
     ListOfLines = 
     [ 
         {
-        Text = "some text of entire line"
-        X = 150.233
-        Y = 88.45
-        Width = 12.2
-        Height = 11.82
+            Text = "some text of entire line"
+            X = 150.233
+            Y = 88.45
+            Width = 12.2
+            Height = 11.82
+            PageInfo =  {
+                            PageNumber = 2,
+                            BlobkId = 12
+                        }
         },
         ... 
     ]
@@ -97,6 +113,10 @@ In all cases you can use string or stream to pass the pdf document.
             Y = 88.45
             Width = 12.2
             Height = 11.82
+            PageInfo =  {
+                            PageNumber = 1,
+                            BlobkId = 0
+                        }
         }
 
         {
@@ -105,6 +125,10 @@ In all cases you can use string or stream to pass the pdf document.
             Y = 88.45
             Width = 12.2
             Height = 11.82
+            PageInfo =  {
+                            PageNumber = 1,
+                            BlobkId = 1
+                        }
         }
     ]
 }
