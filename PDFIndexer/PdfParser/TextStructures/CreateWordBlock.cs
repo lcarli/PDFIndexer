@@ -11,7 +11,14 @@ namespace PDFIndexer.PdfParser.TextStructures
         {
             foreach (var bset in page.AllBlocks)
             {
+                int blockId = 0;
                 var bline = bset as BlockLine;
+
+                var pageInfo = new TextPageInfo()
+                {
+                    PageNumber = pageNumber,
+                    BlockId = blockId
+                };
 
                 var newLine = new TextLine
                 {
@@ -19,9 +26,11 @@ namespace PDFIndexer.PdfParser.TextStructures
                     FontName = bline.FontName,
                     FontSize = bline.FontSize,
                     FontStyle = bline.FontStyle,
-                    Block = bline
+                    Block = bline,
+                    PageInfo = pageInfo
                 };
 
+                blockId++;
                 yield return newLine;
             }
         }
