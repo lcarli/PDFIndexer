@@ -119,7 +119,8 @@ namespace PDFIndexer
                     X = item.GetX(),
                     Y = item.GetH(),
                     Width = item.GetWidth(),
-                    Height = item.GetHeight()
+                    Height = item.GetHeight(),
+                    page = item.PageInfo.PageNumber
                 };
                 metadataList.Add(metadataItem);
             }

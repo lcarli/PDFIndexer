@@ -11,6 +11,7 @@ namespace PDFIndexer
         public float Y { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
+        public int page { get; set; }
 
     }
 }
