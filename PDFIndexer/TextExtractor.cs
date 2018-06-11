@@ -155,7 +155,7 @@ namespace PDFIndexer
             var _listOfWords = ExtractWordsMetadata(path);
             var _text = ExtractFullText(path);
 
-            return new IndexMetadata(_text, _listOfLines, _listOfWords);
+            return new IndexMetadata(_text, _listOfLines, _listOfWords, path);
         }
     }
 }
