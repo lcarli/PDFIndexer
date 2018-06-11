@@ -15,11 +15,17 @@ namespace PDFIndexer.Search
         {
             string path = @"C:\Users\lucas\Desktop\IBAgro\BLOG - ARTIGO NÚMERO 05 - BANANA PASSA.pdf";
 
+            string path2 = @"C:\Users\lucas\Desktop\IBAgro\BLOG - ARTIGO NÚMERO SETE - CAJU.pdf";
+
+            string path3 = @"C:\Users\lucas\Desktop\IBAgro\BLOG - ARTIGO OITO - CUMBARÚ.pdf";
+
 
             TextExtractor te = new TextExtractor();
             return new List<IndexMetadata>
             {
-                te.GetIndexMetadata(path)
+                te.GetIndexMetadata(path),
+                te.GetIndexMetadata(path2),
+                te.GetIndexMetadata(path3)
             };
         }
     }

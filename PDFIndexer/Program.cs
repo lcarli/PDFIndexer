@@ -1,6 +1,7 @@
 ﻿using PDFIndexer.Search;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace PDFIndexer
@@ -9,9 +10,7 @@ namespace PDFIndexer
     {
         static void Main(string[] args)
         {
-            LuceneSearch s = new LuceneSearch();
-
-            var result = s.Search("banana");
+            var result = LuceneSearch.SearchDefault("banana");
 
             Console.ReadKey();
         }
