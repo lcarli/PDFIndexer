@@ -50,19 +50,6 @@ namespace PDFIndexer.Search
         }
 
 
-        private static void _addToLuceneIndex(IndexMetadata data, IndexWriter writer)
-        {
-            // add new index entry
-            var doc = new Document();
-
-            // add lucene fields mapped to db fields
-            doc.Add(new TextField("Text", data.Text, Field.Store.YES));
-            doc.Add(new TextField("Id", data.Id.ToString(), Field.Store.YES));
-            doc.Add(new TextField("Words", JsonConvert.SerializeObject(data.ListOfWords), Field.Store.YES));
-            doc.Add(new TextField("Lines", JsonConvert.SerializeObject(data.ListOfLines), Field.Store.YES));
-            writer.AddDocument(doc);
-        }
-
 
         public static void _addToLuceneIndex<T>(T obj, IndexWriter writer) where T : class
         {
@@ -103,42 +90,15 @@ namespace PDFIndexer.Search
             }
         }
 
-        public static void AddUpdateLuceneIndex(IEnumerable<IndexMetadata> sampleDatas)
-        {
-            // remove older index entry
-            //ClearLuceneIndexRecord(data.Id);
-            ClearLuceneIndex();
-
-
-            // init lucene
-            Analyzer analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48);
-
-            IndexWriterConfig iwc = new IndexWriterConfig(LuceneVersion.LUCENE_48, analyzer);
-            // Add new documents to an existing index:
-            iwc.OpenMode = OpenMode.CREATE_OR_APPEND;
-
-            using (var writer = new IndexWriter(_directory, iwc))
-            {
-                // add data to lucene search index (replaces older entry if any)
-                foreach (var sampleData in sampleDatas)
-                {
-                    _addToLuceneIndex(sampleData, writer);
-                }
-                writer.Dispose();
-            }
-        }
 
         public static void AddUpdateLuceneIndex<T>(T sampleData) where T : class
         {
             AddUpdateLuceneIndex(new List<T> { sampleData });
         }
 
-        public static void AddUpdateLuceneIndex(IndexMetadata sampleData)
-        {
-            AddUpdateLuceneIndex(new List<IndexMetadata> { sampleData });
-        }
 
-        public static void ClearLuceneIndexRecord(Guid record_id)
+        //Still working on this
+        private static void ClearLuceneIndexRecord(Guid record_id)
         {
             // init lucene
             Analyzer analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48);
@@ -177,18 +137,6 @@ namespace PDFIndexer.Search
             return true;
         }
 
-        private static IndexMetadata _mapLuceneDocumentToData(Document doc)
-        {
-            return new IndexMetadata()
-            {
-                Id = Guid.Parse(doc.Get("Id")),
-                Text = doc.Get("Text"),
-                ListOfWords = JsonConvert.DeserializeObject<List<PdfMetadata>>(doc.Get("Words")),
-                ListOfLines = JsonConvert.DeserializeObject<List<PdfMetadata>>(doc.Get("Lines")),
-                PDFURI = doc.Get("URI")
-            };
-        }
-
         private static T _mapLuceneDocumentToData<T>(Document doc) where T : class
         {
             var obj = Activator.CreateInstance(typeof(T));
@@ -199,7 +147,7 @@ namespace PDFIndexer.Search
             {
                 if (item.PropertyType == typeof(Guid))
                 {
-                    item.SetValue(obj, Guid.Parse(doc.Get(item.Name).Replace("\"","").Replace("\\","")));
+                    item.SetValue(obj, Guid.Parse(doc.Get(item.Name).Replace("\"", "").Replace("\\", "")));
                 }
                 else
                 {
@@ -210,21 +158,12 @@ namespace PDFIndexer.Search
                 }
             }
 
-            return obj as T;    
+            return obj as T;
         }
 
         public static T GetObject<T>() where T : new()
         {
             return new T();
-        }
-
-        private static IEnumerable<IndexMetadata> _mapLuceneToDataList(IEnumerable<Document> hits)
-        {
-            return hits.Select(_mapLuceneDocumentToData).ToList();
-        }
-        private static IEnumerable<IndexMetadata> _mapLuceneToDataList(IEnumerable<ScoreDoc> hits, IndexSearcher searcher)
-        {
-            return hits.Select(hit => _mapLuceneDocumentToData(searcher.Doc(hit.Doc))).ToList();
         }
 
         private static IEnumerable<T> _mapLuceneToDataList<T>(IEnumerable<Document> hits) where T : class
@@ -238,7 +177,6 @@ namespace PDFIndexer.Search
 
         private static IEnumerable<T> _search<T>(string searchQuery, string searchField) where T : class
         {
-            //NewTest
             Analyzer analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48);
             QueryParser parser = new QueryParser(LuceneVersion.LUCENE_48, searchField, analyzer);
 
@@ -254,44 +192,6 @@ namespace PDFIndexer.Search
             }
         }
 
-        private static IEnumerable<IndexMetadata> _search(string searchQuery, string searchField = "")
-        {
-            LuceneDirStart();
-            AddUpdateLuceneIndex(DataForTest.GetAll());
-
-
-            if (String.IsNullOrWhiteSpace(searchField))
-            {
-                searchField = field;
-            }
-
-            //NewTest
-            Analyzer analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48);
-            QueryParser parser = new QueryParser(LuceneVersion.LUCENE_48, searchField, analyzer);
-
-            Query query = parser.Parse(searchQuery);
-
-
-            using (IndexReader reader = DirectoryReader.Open(_directory))
-            {
-                // set up lucene searcher
-                IndexSearcher searcher = new IndexSearcher(reader);
-                var result = searcher.Search(query, null, 10);
-                return _mapLuceneToDataList(result.ScoreDocs.ToList(), searcher);
-            }
-        }
-
-        public static IEnumerable<IndexMetadata> Search(string input, string fieldName = "")
-        {
-            if (string.IsNullOrEmpty(input)) return new List<IndexMetadata>();
-
-            var terms = input.Trim().Replace("-", " ").Split(' ')
-                .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim() + "*");
-            input = string.Join(" ", terms);
-
-            return _search(input, fieldName);
-        }
-
         public static IEnumerable<T> Search<T>(string input, string fieldName = "") where T : class
         {
             if (string.IsNullOrEmpty(input)) return new List<T>();
@@ -303,35 +203,31 @@ namespace PDFIndexer.Search
             return _search<T>(input, fieldName);
         }
 
-        public static IEnumerable<IndexMetadata> SearchDefault(string input, string fieldName = "")
-        {
-            return string.IsNullOrEmpty(input) ? new List<IndexMetadata>() : _search(input, fieldName);
-        }
-
         public static IEnumerable<T> SearchDefault<T>(string input, string fieldName = "") where T : class
         {
             return string.IsNullOrEmpty(input) ? new List<T>() : _search<T>(input, fieldName);
         }
 
-        public static IEnumerable<IndexMetadata> GetAllIndexRecords()
+        public static IEnumerable<T> GetAllIndexRecords<T>() where T : class
         {
-            // validate search index
-            if (!System.IO.Directory.EnumerateFiles(_luceneDir).Any()) return new List<IndexMetadata>();
+            List<T> newList = new List<T>();
 
-
-            using (IndexReader reader = DirectoryReader.Open(_directoryTemp))
+            using (IndexReader reader = DirectoryReader.Open(_directory))
             {
-                // set up lucene searcher
-                var searcher = new IndexSearcher(reader);
-                Analyzer analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48);
-                //var docs = new List<Document>();
-                //var term = reader.;
-                //while (term.Next()) docs.Add(searcher.Doc(term.Doc));
-                //reader.Dispose();
-                //searcher.Dispose();
-                //return _mapLuceneToDataList(docs);
-                return null;
+                for (int i = 0; i < reader.MaxDoc; i++)
+                {
+                    try
+                    {
+                        Document doc = reader.Document(i);
+                        newList.Add(_mapLuceneDocumentToData<T>(doc));
+                    }
+                    catch (Exception)
+                    {
+                        //Do something
+                    }
+                }
             }
+            return newList;
         }
     }
 }

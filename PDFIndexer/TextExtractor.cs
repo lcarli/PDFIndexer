@@ -157,6 +157,22 @@ namespace PDFIndexer
 
             return new IndexMetadata(_text, _listOfLines, _listOfWords, path);
         }
+
+        public List<IndexMetadata> GeAlltIndexMetadata(string path)
+        {
+            List<IndexMetadata> _list = new List<IndexMetadata>();
+            DirectoryInfo d = new DirectoryInfo(path);
+
+            foreach (var file in d.GetFiles("*.pdf"))
+            {
+                var _listOfLines = ExtractLinesMetadata(file.FullName);
+                var _listOfWords = ExtractWordsMetadata(file.FullName);
+                var _text = ExtractFullText(file.FullName);
+
+                _list.Add(new IndexMetadata(_text, _listOfLines, _listOfWords, path));
+            }
+            return _list;
+        }
     }
 }
 
