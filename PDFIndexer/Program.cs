@@ -10,7 +10,12 @@ namespace PDFIndexer
     {
         static void Main(string[] args)
         {
-            var result = LuceneSearch.SearchDefault("banana");
+
+
+            //TESTE
+            LuceneSearch.AddUpdateLuceneIndex<IndexMetadata>(DataForTest.GetAll());
+
+            var result = LuceneSearch.SearchDefault<IndexMetadata>("banana", "Text");
 
             Console.ReadKey();
         }

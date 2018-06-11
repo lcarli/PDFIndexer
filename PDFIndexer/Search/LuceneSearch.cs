@@ -7,12 +7,12 @@ using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace PDFIndexer.Search
 {
@@ -64,6 +64,45 @@ namespace PDFIndexer.Search
         }
 
 
+        public static void _addToLuceneIndex<T>(T obj, IndexWriter writer) where T : class
+        {
+            var doc = new Document();
+
+            var props = obj.GetType().GetProperties().ToList();
+
+            foreach (var item in props)
+            {
+                doc.Add(new TextField(item.Name, JsonConvert.SerializeObject(item.GetValue(obj)), Field.Store.YES));
+            }
+
+            writer.AddDocument(doc);
+        }
+
+        public static void AddUpdateLuceneIndex<T>(IEnumerable<T> sampleDatas) where T : class
+        {
+            // remove older index
+            LuceneDirStart();
+            ClearLuceneIndex();
+
+
+            // init lucene
+            Analyzer analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48);
+
+            IndexWriterConfig iwc = new IndexWriterConfig(LuceneVersion.LUCENE_48, analyzer);
+            // Add new documents to an existing index:
+            iwc.OpenMode = OpenMode.CREATE_OR_APPEND;
+
+            using (var writer = new IndexWriter(_directory, iwc))
+            {
+                // add data to lucene search index (replaces older entry if any)
+                foreach (var sampleData in sampleDatas)
+                {
+                    _addToLuceneIndex<T>(sampleData, writer);
+                }
+                writer.Dispose();
+            }
+        }
+
         public static void AddUpdateLuceneIndex(IEnumerable<IndexMetadata> sampleDatas)
         {
             // remove older index entry
@@ -75,7 +114,7 @@ namespace PDFIndexer.Search
             Analyzer analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48);
 
             IndexWriterConfig iwc = new IndexWriterConfig(LuceneVersion.LUCENE_48, analyzer);
-                // Add new documents to an existing index:
+            // Add new documents to an existing index:
             iwc.OpenMode = OpenMode.CREATE_OR_APPEND;
 
             using (var writer = new IndexWriter(_directory, iwc))
@@ -89,6 +128,10 @@ namespace PDFIndexer.Search
             }
         }
 
+        public static void AddUpdateLuceneIndex<T>(T sampleData) where T : class
+        {
+            AddUpdateLuceneIndex(new List<T> { sampleData });
+        }
 
         public static void AddUpdateLuceneIndex(IndexMetadata sampleData)
         {
@@ -142,21 +185,76 @@ namespace PDFIndexer.Search
                 Text = doc.Get("Text"),
                 ListOfWords = JsonConvert.DeserializeObject<List<PdfMetadata>>(doc.Get("Words")),
                 ListOfLines = JsonConvert.DeserializeObject<List<PdfMetadata>>(doc.Get("Lines")),
-                //PDFURI = doc.Get("URI")
+                PDFURI = doc.Get("URI")
             };
+        }
+
+        private static T _mapLuceneDocumentToData<T>(Document doc) where T : class
+        {
+            var obj = Activator.CreateInstance(typeof(T));
+
+            var props = obj.GetType().GetProperties().ToList();
+
+            foreach (var item in props)
+            {
+                if (item.PropertyType == typeof(Guid))
+                {
+                    item.SetValue(obj, Guid.Parse(doc.Get(item.Name).Replace("\"","").Replace("\\","")));
+                }
+                else
+                {
+                    Type t = item.PropertyType;
+                    var a = item.GetType();
+
+                    item.SetValue(obj, JsonConvert.DeserializeObject(doc.Get(item.Name), t));
+                }
+            }
+
+            return obj as T;    
+        }
+
+        public static T GetObject<T>() where T : new()
+        {
+            return new T();
         }
 
         private static IEnumerable<IndexMetadata> _mapLuceneToDataList(IEnumerable<Document> hits)
         {
             return hits.Select(_mapLuceneDocumentToData).ToList();
         }
-        private static IEnumerable<IndexMetadata> _mapLuceneToDataList(IEnumerable<ScoreDoc> hits,
-            IndexSearcher searcher)
+        private static IEnumerable<IndexMetadata> _mapLuceneToDataList(IEnumerable<ScoreDoc> hits, IndexSearcher searcher)
         {
             return hits.Select(hit => _mapLuceneDocumentToData(searcher.Doc(hit.Doc))).ToList();
         }
 
-        private static IEnumerable<IndexMetadata> _search (string searchQuery, string searchField = "")
+        private static IEnumerable<T> _mapLuceneToDataList<T>(IEnumerable<Document> hits) where T : class
+        {
+            return hits.Select(_mapLuceneDocumentToData<T>).ToList();
+        }
+        private static IEnumerable<T> _mapLuceneToDataList<T>(IEnumerable<ScoreDoc> hits, IndexSearcher searcher) where T : class
+        {
+            return hits.Select(hit => _mapLuceneDocumentToData<T>(searcher.Doc(hit.Doc))).ToList();
+        }
+
+        private static IEnumerable<T> _search<T>(string searchQuery, string searchField) where T : class
+        {
+            //NewTest
+            Analyzer analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48);
+            QueryParser parser = new QueryParser(LuceneVersion.LUCENE_48, searchField, analyzer);
+
+            Query query = parser.Parse(searchQuery);
+
+
+            using (IndexReader reader = DirectoryReader.Open(_directory))
+            {
+                // set up lucene searcher
+                IndexSearcher searcher = new IndexSearcher(reader);
+                var result = searcher.Search(query, null, 10);
+                return _mapLuceneToDataList<T>(result.ScoreDocs.ToList(), searcher);
+            }
+        }
+
+        private static IEnumerable<IndexMetadata> _search(string searchQuery, string searchField = "")
         {
             LuceneDirStart();
             AddUpdateLuceneIndex(DataForTest.GetAll());
@@ -194,9 +292,25 @@ namespace PDFIndexer.Search
             return _search(input, fieldName);
         }
 
+        public static IEnumerable<T> Search<T>(string input, string fieldName = "") where T : class
+        {
+            if (string.IsNullOrEmpty(input)) return new List<T>();
+
+            var terms = input.Trim().Replace("-", " ").Split(' ')
+                .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim() + "*");
+            input = string.Join(" ", terms);
+
+            return _search<T>(input, fieldName);
+        }
+
         public static IEnumerable<IndexMetadata> SearchDefault(string input, string fieldName = "")
         {
             return string.IsNullOrEmpty(input) ? new List<IndexMetadata>() : _search(input, fieldName);
+        }
+
+        public static IEnumerable<T> SearchDefault<T>(string input, string fieldName = "") where T : class
+        {
+            return string.IsNullOrEmpty(input) ? new List<T>() : _search<T>(input, fieldName);
         }
 
         public static IEnumerable<IndexMetadata> GetAllIndexRecords()
