@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace PDFIndexer.Search
+namespace PDFIndexer.Utils
 {
     static class LuceneSearch
     {

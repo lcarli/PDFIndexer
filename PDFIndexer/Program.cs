@@ -1,4 +1,6 @@
-﻿using PDFIndexer.Search;
+﻿using PDFIndexer.CommomModels;
+using PDFIndexer.Search;
+using PDFIndexer.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +12,6 @@ namespace PDFIndexer
     {
         static void Main(string[] args)
         {
-
 
             //TESTE
             LuceneSearch.AddUpdateLuceneIndex<IndexMetadata>(DataForTest.GetAll());

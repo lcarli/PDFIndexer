@@ -18,8 +18,9 @@ using PDFIndexer.Base;
 using PDFIndexer.PDFCore;
 using PDFIndexer.Parser;
 using PDFIndexer.TextStructures;
+using PDFIndexer.CommomModels;
 
-namespace PDFIndexer
+namespace PDFIndexer.Utils
 {
     class TextExtractor
     {

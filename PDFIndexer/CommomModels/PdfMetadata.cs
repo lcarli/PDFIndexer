@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PDFIndexer
+namespace PDFIndexer.CommomModels
 {
     class PdfMetadata
     {

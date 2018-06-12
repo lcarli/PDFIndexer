@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PDFIndexer.CommomModels;
+using PDFIndexer.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
