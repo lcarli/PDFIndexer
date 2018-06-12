@@ -5,19 +5,27 @@ using System.Text;
 
 namespace PDFIndexer.Utils
 {
-    class ProcessResult
+    static class ProcessResult
     {
-        public List<IndexMetadata> _result { get; }
 
-        public ProcessResult(List<IndexMetadata> result)
+        public static void ProcessResults(List<IndexMetadata> results)
         {
-            _result = result;
+            //TODO: Extract Page
+            //      Convert2Image
+            //      Cut
+            //      Create SampleObject
+
+
+
+
+            foreach (var result in results)
+            {
+
+            }
         }
 
-        public ProcessResult() { }
 
-
-        private List<HighlightObject> HightlightWords(IndexMetadata input, string keyword)
+        private static List<HighlightObject> HightlightWords(IndexMetadata input, string keyword)
         {
             List<PdfMetadata> words = new List<PdfMetadata>();
             List<List<PdfMetadata>> wordPerPage = new List<List<PdfMetadata>>();
@@ -56,7 +64,7 @@ namespace PDFIndexer.Utils
             return list;
         }
 
-        private List<BoundingBox> ConvertWord2BoundingBox(List<PdfMetadata> words)
+        private static List<BoundingBox> ConvertWord2BoundingBox(List<PdfMetadata> words)
         {
             List<BoundingBox> list = new List<BoundingBox>();
 
