@@ -170,7 +170,7 @@ namespace PDFIndexer.Utils
                 var _listOfWords = ExtractWordsMetadata(file.FullName);
                 var _text = ExtractFullText(file.FullName);
 
-                _list.Add(new IndexMetadata(_text, _listOfLines, _listOfWords, path));
+                _list.Add(new IndexMetadata(_text, _listOfLines, _listOfWords, file.FullName));
             }
             return _list;
         }

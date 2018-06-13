@@ -1,17 +1,21 @@
 ﻿using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Xobject;
 using PDFIndexer.Base;
 using PDFIndexer.CommomModels;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Drawing;
+using iText.Layout.Element;
+using Leadtools.Codecs;
+using Leadtools;
 
 namespace PDFIndexer.Utils
 {
     static class ProcessResult
     {
-        private static string tempPath = "";
-        public static List<SampleObject> ProcessResults(List<IndexMetadata> results, string keyword)
+        private static string rawTempPath = Path.Combine(Directory.GetCurrentDirectory(), "_temp");
+        private static string tempPath = rawTempPath+"\\out.pdf";
+        public static List<SampleObject> ProcessResults(IEnumerable<IndexMetadata> results, string keyword)
         {
             List<SampleObject> list = new List<SampleObject>();
 
@@ -23,8 +27,16 @@ namespace PDFIndexer.Utils
                     list.Add(item);
                 }
             }
-            File.Delete(tempPath);
+
+            //Delete pos process
+            //DeleteFile(tempPath);
+           
             return list;
+        }
+
+        private static void DeleteFile(string path)
+        {
+            File.Delete(path);
         }
 
 
@@ -50,19 +62,27 @@ namespace PDFIndexer.Utils
             return objects;
         }
 
-        private static string ExtracPage(HighlightObject result)
+        private static PdfDocument ExtracPage(HighlightObject result)
         {
-            File.Delete(tempPath);
-            using (var pdfInput = new PdfDocument(VirtualFS.OpenPdfReader(result.Metadata.PDFURI)))
+            var pdfInput = new PdfDocument(VirtualFS.OpenPdfReader(result.Metadata.PDFURI));
+            PdfPage origPage = pdfInput.GetPage(result.PageNumber);
+            //PdfDocument pdf = new PdfDocument(new PdfWriter(tempPath));
+            //var t = origPage.CopyTo(pdf);
+
             using (var pdfOutput = new PdfDocument(VirtualFS.OpenPdfWriter(tempPath)))
             {
-                pdfInput.CopyPagesTo(result.PageNumber, result.PageNumber, pdfOutput);
-                return tempPath;
+                pdfInput.CopyPagesTo(1,1, pdfOutput);
+                return pdfOutput;
             }
         }
 
-        private static byte[] ConvertPdf2Image(string pagePath)
+        private static byte[] ConvertPdf2Image(PdfDocument page)
         {
+            RasterCodecs _codecs = new RasterCodecs();
+            RasterImage _Image = _codecs.Load(tempPath);
+            _codecs.Save(_Image, tempPath+"\\image.png", RasterImageFormat.Png, 24);
+
+
             return null;
         }
 

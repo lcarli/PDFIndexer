@@ -14,6 +14,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="itext7" Version="7.1.2" />
+    <PackageReference Include="Leadtools.Formats.Raster.Common" Version="20.0.0.1" />
     <PackageReference Include="Lucene.Net" Version="4.8.0-beta00005" />
   </ItemGroup>
 
