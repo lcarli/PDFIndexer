@@ -7,7 +7,7 @@ namespace PDFIndexer.CommomModels
     class SampleObject
     {
         public IndexMetadata Metadata { get; set; }
-        public byte[] Image { get; set; }
-        public byte[] Sample { get; set; }
+        public string ImageUri { get; set; }
+        public string Sample { get; set; }
     }
 }

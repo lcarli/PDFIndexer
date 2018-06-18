@@ -1,20 +1,25 @@
-﻿using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Xobject;
+﻿using iText.IO.Image;
+using iText.Kernel.Pdf;
 using PDFIndexer.Base;
 using PDFIndexer.CommomModels;
+using PDFIndexer.Services;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Drawing;
-using iText.Layout.Element;
-using Leadtools.Codecs;
-using Leadtools;
+
 
 namespace PDFIndexer.Utils
 {
     static class ProcessResult
     {
         private static string rawTempPath = Path.Combine(Directory.GetCurrentDirectory(), "_temp");
-        private static string tempPath = rawTempPath+"\\out.pdf";
+        private static string tempPath = rawTempPath + "\\out.pdf";
+        private static string gsPath = "{YOUR GHOSTSCRIPT PATH}";
+
+
+
+
         public static List<SampleObject> ProcessResults(IEnumerable<IndexMetadata> results, string keyword)
         {
             List<SampleObject> list = new List<SampleObject>();
@@ -30,7 +35,7 @@ namespace PDFIndexer.Utils
 
             //Delete pos process
             //DeleteFile(tempPath);
-           
+
             return list;
         }
 
@@ -54,41 +59,60 @@ namespace PDFIndexer.Utils
                 SampleObject so = new SampleObject
                 {
                     Metadata = result,
-                    Image = ConvertPdf2Image(ExtracPage(ho))
+                    ImageUri = ConvertPdf2Image(ExtracPage(ho))
                 };
-                so.Sample = CutImage(so.Image);
+                //so.Sample = CutImage(so.ImageUri);
+                so.Sample = "";
                 objects.Add(so);
             }
             return objects;
         }
 
-        private static PdfDocument ExtracPage(HighlightObject result)
+        private static string ExtracPage(HighlightObject result)
         {
             var pdfInput = new PdfDocument(VirtualFS.OpenPdfReader(result.Metadata.PDFURI));
             PdfPage origPage = pdfInput.GetPage(result.PageNumber);
-            //PdfDocument pdf = new PdfDocument(new PdfWriter(tempPath));
-            //var t = origPage.CopyTo(pdf);
 
             using (var pdfOutput = new PdfDocument(VirtualFS.OpenPdfWriter(tempPath)))
             {
-                pdfInput.CopyPagesTo(1,1, pdfOutput);
-                return pdfOutput;
+                pdfInput.CopyPagesTo(1, 1, pdfOutput);
             }
+            return tempPath;
         }
 
-        private static byte[] ConvertPdf2Image(PdfDocument page)
+        private static string ConvertPdf2Image(string readerDoc)
         {
-            RasterCodecs _codecs = new RasterCodecs();
-            RasterImage _Image = _codecs.Load(tempPath);
-            _codecs.Save(_Image, tempPath+"\\image.png", RasterImageFormat.Png, 24);
+            PdfImageConverter imageConverter = new PdfImageConverter(gsPath, rawTempPath, "204.8");
+            Stream[] pdfPageImageList = null;
 
+            using (var pdfInput = File.OpenRead(readerDoc))
+            {
+                try
+                {
+                    //The array of streams will respect the page number-1, page 1 equal index 0;
+                    imageConverter.GenerateImage(pdfInput, ref pdfPageImageList);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error generating pdf images {ex.Message}");
+                }
+            }
 
-            return null;
+            FileInfo f = new FileInfo(readerDoc);
+
+            return ImageProcessing.UploadImages(pdfPageImageList[0], f.Name.Replace(".pdf", ""));
+        }   
+
+        private static Stream CutImage(Stream _oldImage, float X, float Y, float W, float H)
+        {
+            return ImageProcessing.Crop(_oldImage, X, Y, W, H);
         }
 
-        private static byte[] CutImage(byte[] _oldImage)
+        private static void SaveImage(byte[] _oldImage)
         {
-            return null;
+            var fs = new BinaryWriter(new FileStream(rawTempPath + "\\imgout.jpg", FileMode.Append, FileAccess.Write));
+            fs.Write(_oldImage);
+            fs.Close();
         }
 
 
@@ -141,6 +165,20 @@ namespace PDFIndexer.Utils
             }
 
             return list;
+        }
+
+        private static byte[] ReadFully(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
         }
 
     }
