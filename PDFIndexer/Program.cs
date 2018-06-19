@@ -21,6 +21,8 @@ namespace PDFIndexer
 
             var bla = ProcessResult.ProcessResults(resultAll, "banana");
 
+            Console.WriteLine("TERMINOU");
+
             Console.ReadKey();
         }
     }

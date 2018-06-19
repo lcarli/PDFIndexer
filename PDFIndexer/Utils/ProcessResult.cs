@@ -15,7 +15,7 @@ namespace PDFIndexer.Utils
     {
         private static string rawTempPath = Path.Combine(Directory.GetCurrentDirectory(), "_temp");
         private static string tempPath = rawTempPath + "\\out.pdf";
-        private static string gsPath = "{YOUR GHOSTSCRIPT PATH}";
+        private static string gsPath = @"D:\Repos\PDFIndexer\PDFIndexer\Ghost\gswin64c.exe";
 
 
 
