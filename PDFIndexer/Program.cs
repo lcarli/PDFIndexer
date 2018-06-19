@@ -12,13 +12,16 @@ namespace PDFIndexer
     {
         static void Main(string[] args)
         {
-
             //TESTE
             LuceneSearch.AddUpdateLuceneIndex<IndexMetadata>(DataForTest.GetAll());
 
             var result = LuceneSearch.SearchDefault<IndexMetadata>("banana", "Text");
 
             var resultAll = LuceneSearch.GetAllIndexRecords<IndexMetadata>();
+
+            var bla = ProcessResult.ProcessResults(resultAll, "banana");
+
+            Console.WriteLine("TERMINOU");
 
             Console.ReadKey();
         }
