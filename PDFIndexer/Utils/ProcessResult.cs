@@ -14,8 +14,8 @@ namespace PDFIndexer.Utils
     static class ProcessResult
     {
         private static string rawTempPath = Path.Combine(Directory.GetCurrentDirectory(), "_temp");
-        private static string tempPath = rawTempPath + "\\out.pdf";
-        private static string gsPath = @"D:\Repos\PDFIndexer\PDFIndexer\Ghost\gswin64c.exe";
+        private static string tempPath = rawTempPath + @"\out.pdf";
+        private static string gsPath = Path.Combine(Environment.CurrentDirectory,@"Ghost\gswin64c.exe");
 
 
 
