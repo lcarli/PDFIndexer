@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "PDF Search";
+
+    var type = (string)TempData["_alert.type"];
+    var title = (string)TempData["_alert.title"];
+    var body = (string)TempData["_alert.body"];
+
+}
+
+@if (!string.IsNullOrEmpty(type))
+{
+    <div class="alert alert-@type alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>@title</strong> @body
+    </div>
+}
+
+<br />
+<br />
+
+
+
+<form class="form-wrapper cf" asp-action="Search" asp-controller="Home">
+    <input type="text" placeholder="Search here..." required>
+    <button type="submit">Search</button>
+</form>

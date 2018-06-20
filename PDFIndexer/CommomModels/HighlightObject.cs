@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.CommomModels
 {
-    class HighlightObject
+    public class HighlightObject
     {
         public IndexMetadata Metadata { get; set; }
         public List<BoundingBox> HighlightedWords { get; set; }
@@ -12,7 +12,7 @@ namespace PDFIndexer.CommomModels
         public int PageNumber { get; set; }
     }
 
-    class BoundingBox
+    public class BoundingBox
     {
         public float X { get; set; }
         public float Y { get; set; }

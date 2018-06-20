@@ -11,7 +11,7 @@ using System.IO;
 
 namespace PDFIndexer.Utils
 {
-    static class ProcessResult
+    public static class ProcessResult
     {
         private static string rawTempPath = Config.TemporatyPath;
         private static string tempPath = rawTempPath + @"\out.pdf";

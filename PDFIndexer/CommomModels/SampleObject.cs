@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.CommomModels
 {
-    class SampleObject
+    public class SampleObject
     {
         public IndexMetadata Metadata { get; set; }
         public HighlightObject HighlightObject { get; set; }

@@ -16,7 +16,7 @@ using System.Reflection;
 
 namespace PDFIndexer.Utils
 {
-    static class LuceneSearch
+    public static class LuceneSearch
     {
         static string currentDirectory = System.IO.Directory.GetCurrentDirectory();
         public static string _luceneDir = Path.Combine(currentDirectory, "lucene_index");
