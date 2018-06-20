@@ -25,9 +25,11 @@
 <br />
 
 
-<form class="form-wrapper cf" asp-action="Search" asp-controller="Home">
-    <input type="text" placeholder="Search here..." required style="color: black">
-    <button type="submit">Search</button>
+<form class="form-wrapper cf" asp-action="Search" asp-controller="Home" method="post" role="form">
+    <div class="form-group">
+        <input id="text" type="text" placeholder="Search here..." required style="color: black">
+        <button type="submit">Search</button>
+    </div>
 </form>
 
 
@@ -35,7 +37,7 @@
 <br />
 
 
-@if (Model != null || Model.Count < 1)
+@if (Model != null)
 {
     foreach (var item in Model)
     {
