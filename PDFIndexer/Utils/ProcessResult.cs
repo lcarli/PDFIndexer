@@ -58,14 +58,21 @@ namespace PDFIndexer.Utils
             {
                 SampleObject so = new SampleObject
                 {
+                    HighlightObject = ho,
                     Metadata = result,
-                    ImageUri = ConvertPdf2Image(ExtracPage(ho))
+                    ImageUri = GetPageImageUri(ho.Metadata.PDFURI, ho.PageNumber)
                 };
-                //so.Sample = CutImage(so.ImageUri);
-                so.Sample = "";
                 objects.Add(so);
             }
             return objects;
+        }
+
+        private static string GetPageImageUri(string document, int page )
+        {
+            var container = ImageProcessing.GetContainer("{YOUR CONNECTION STRING}", "imagepdf");
+            var blob = container.GetBlobReference($"{Path.GetFileNameWithoutExtension(document)}/page_{page}.jpg");
+
+            return blob.Uri.ToString();
         }
 
         private static string ExtracPage(HighlightObject result)
@@ -80,7 +87,7 @@ namespace PDFIndexer.Utils
             return tempPath;
         }
 
-        private static string ConvertPdf2Image(string readerDoc)
+        public static List<string> ConvertPdf2Image(string readerDoc)
         {
             PdfImageConverter imageConverter = new PdfImageConverter(gsPath, rawTempPath, "204.8");
             Stream[] pdfPageImageList = null;
@@ -100,7 +107,7 @@ namespace PDFIndexer.Utils
 
             FileInfo f = new FileInfo(readerDoc);
 
-            return ImageProcessing.UploadImages(pdfPageImageList[0], f.Name.Replace(".pdf", ""));
+            return ImageProcessing.UploadImages(pdfPageImageList, f.Name.Replace(".pdf", ""));
         }   
 
         private static Stream CutImage(Stream _oldImage, float X, float Y, float W, float H)

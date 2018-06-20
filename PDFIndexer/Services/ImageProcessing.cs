@@ -41,33 +41,39 @@ namespace PDFIndexer.Services
             return output;
         }
 
-        public static string UploadImages(Stream pdfPageImageList, string filename)
+        public static List<string> UploadImages(Stream[] pdfPageImageList, string filename)
         {
             //Upload Pages in Patch
             var container = GetContainer("{YOUR CONNECTION STRING}", "imagepdf");
-
 
             container.CreateIfNotExistsAsync().GetAwaiter().GetResult();
 
             container.SetPermissionsAsync(new BlobContainerPermissions()
             {
                 PublicAccess = BlobContainerPublicAccessType.Container
-            }).GetAwaiter().GetResult();
+            }).GetAwaiter().GetResult();    
 
 
             var tasks = new List<Task>();
             var rand = new Random(DateTime.Now.Second);
             int value = rand.Next();
-            var blobName = $"{filename}/image{value}.jpg";
-            var blob = container.GetBlockBlobReference(blobName);
-            blob.Properties.ContentType = "image/jpg";
-            tasks.Add(blob.UploadFromStreamAsync(pdfPageImageList));
+            var list = new List<string>();
+            
+            for (int page = 0; page < pdfPageImageList.Length; page++)
+            {
+                var blobName = $"{filename}/page_{page + 1}.jpg";
+                var blob = container.GetBlockBlobReference(blobName);
+                blob.Properties.ContentType = "image/jpg";
+                tasks.Add(blob.UploadFromStreamAsync(pdfPageImageList[page]));
+                list.Add(blob.Uri.ToString());
+            }
+
             Task.WaitAll(tasks.ToArray());
 
-            return blob.Uri.ToString();
+            return list;
         }
 
-        private static CloudBlobContainer GetContainer(string connectionString, string containerName)
+        public static CloudBlobContainer GetContainer(string connectionString, string containerName)
         {
             string conn = connectionString;
 
