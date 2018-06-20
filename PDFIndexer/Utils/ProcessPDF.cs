@@ -39,11 +39,11 @@ namespace PDFIndexer.Utils
 
         }
 
-        public static List<SampleObject> GetVisualResults(string keyword)
+        public static async Task<List<SampleObject>> GetVisualResults(string keyword)
         {
             var result = LuceneSearch.SearchDefault<IndexMetadata>(keyword, "Text");
 
-            return ProcessResult.ProcessResults(result, keyword);
+            return await ProcessResult.ProcessResults(result, keyword);
         }
 
         private static List<string> Convert2Image(string path)

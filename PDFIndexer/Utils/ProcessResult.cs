@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-
+using System.Threading.Tasks;
 
 namespace PDFIndexer.Utils
 {
@@ -20,7 +20,7 @@ namespace PDFIndexer.Utils
 
 
 
-        public static List<SampleObject> ProcessResults(IEnumerable<IndexMetadata> results, string keyword)
+        public async static Task<List<SampleObject>> ProcessResults(IEnumerable<IndexMetadata> results, string keyword)
         {
             List<SampleObject> list = new List<SampleObject>();
 
@@ -35,6 +35,8 @@ namespace PDFIndexer.Utils
 
             //Delete pos process
             //DeleteFile(tempPath);
+
+            await Task.CompletedTask;
 
             return list;
         }

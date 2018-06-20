@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using BeautifulPdfSearch.Extensions.Alerts;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using PDFIndexer.CommomModels;
+using PDFIndexer.Utils;
 
 namespace BeautifulPdfSearch.Controllers
 {
@@ -27,27 +29,18 @@ namespace BeautifulPdfSearch.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
 
         public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult Search()
+        public async Task<IActionResult> Search(string text)
         {
+            List<SampleObject> result = await ProcessPDF.GetVisualResults(text);
+
+            //Do something with the result
+
             return View();
         }
 
@@ -73,7 +66,7 @@ namespace BeautifulPdfSearch.Controllers
                 }
             }
 
-            await PDFIndexer.Utils.ProcessPDF.AddPDFs(list);
+            await ProcessPDF.AddPDFs(list);
 
             return View("Index").WithSuccess("Sucess: ", "All PDFs was saved");
         }
