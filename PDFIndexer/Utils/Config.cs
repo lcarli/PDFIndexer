@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace PDFIndexer
+namespace PDFIndexer.Utils
+
 {
     public static class Config
     {
