@@ -13,6 +13,28 @@
 
 }
 
+
+
+<head>
+    <style>
+        div.stretchy-wrapper > div {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .highlight {
+            opacity: 0.5;
+            filter: alpha(opacity=30);
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+
+
+
 @if (!string.IsNullOrEmpty(type))
 {
     <div class="alert alert-@type alert-dismissible" role="alert">
@@ -25,9 +47,9 @@
 <br />
 
 
-<form class="form-wrapper cf" asp-action="Search" asp-controller="Home" method="post" role="form">
+<form class="form-wrapper cf" asp-action="Index" asp-controller="Home" method="post" role="form">
     <div class="form-group">
-        <input id="text" type="text" placeholder="Search here..." required style="color: black">
+        <input id="text" name="text" type="text" placeholder="Search here..." required style="color: black">
         <button type="submit">Search</button>
     </div>
 </form>
@@ -41,16 +63,19 @@
 {
     foreach (var item in Model)
     {
+        <br />
         <div class="col-md-12">
             <div>@System.IO.Path.GetFileNameWithoutExtension(item.Metadata.PDFURI)</div>
-
+            <br />
+            <br />
             <div style="border: #286090 solid 2px;">
                 <div class="stretchy-wrapper" style="padding-bottom: 20%;">
-                    <div class="resultDescription" style="border: solid; border-width: 0px; background-image:url(@item.ImageUri); background-size:100%; background-position-y:44.72843450479233%; overflow: hidden;">
-                        <div class="highlight" style="position: absolute; width: @item.HighlightObject.HighlightedWords[0].Width%; height: @item.HighlightObject.HighlightedWords[0].Height%; left: @item.HighlightObject.HighlightedWords[0].X%; top: @item.HighlightObject.HighlightedWords[0].Y%;" title="" data-wikipedia=""></div>
+                    <div class="resultDescription" style="border: solid; border-width: 0px; background-image:url('@item.ImageUri'); background-size:100%; background-position-y:@item.HighlightObject.HighlightedWords[0].X.ToString().Replace(",",".")%; overflow: hidden;">
+                        <div class="highlight" style="position: absolute; width: @item.HighlightObject.HighlightedWords[0].Width.ToString().Replace(",",".")%; height: @item.HighlightObject.HighlightedWords[0].Height.ToString().Replace(",",".")%; left: @item.HighlightObject.HighlightedWords[0].X.ToString().Replace(",",".")%; top: @item.HighlightObject.HighlightedWords[0].Y.ToString().Replace(",",".")%;" title="" data-wikipedia=""></div>
                     </div>
                 </div>
             </div>
         </div>
+        <br />
     }
 }

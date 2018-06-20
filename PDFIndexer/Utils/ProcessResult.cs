@@ -133,11 +133,12 @@ namespace PDFIndexer.Utils
 
             foreach (var word in input.ListOfWords)
             {
-                if (keyword == word.Text)
+                if (keyword.ToLower() == word.Text.ToLower().TrimStart().TrimEnd())
                 {
                     if (word.page == LastPage)
                     {
                         words.Add(word);
+                        wordPerPage.Add(words);
                     }
                     else
                     {

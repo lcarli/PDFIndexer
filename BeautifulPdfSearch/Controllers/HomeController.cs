@@ -22,35 +22,27 @@ namespace BeautifulPdfSearch.Controllers
         {
             Configuration = configuration;
         }
-        public IActionResult Index(List<SampleObject> result)
+        public async Task<IActionResult> Index([FromForm] string text)
         {
             Config.ImageStorageConn = Configuration.GetSection("Storage")["imageurl"];
             Config.PdfStorageConn = Configuration.GetSection("Storage")["pdfurl"];
 
-            if (result != null || result.Count > 0)
-            {
-                return View(result);
-            }
-            else
+            if (String.IsNullOrWhiteSpace(text))
             {
                 return View();
             }
+            else
+            {
+                List<SampleObject> result = await ProcessPDF.GetVisualResults(text);
+                return View(result);
+            }
+
         }
 
 
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Search([FromForm] string text)
-        {
-            List<SampleObject> result = await ProcessPDF.GetVisualResults(text);
-
-            //Do something with the result
-
-            return RedirectToAction("Index", result);
         }
 
         [HttpPost("UploadFiles")]
