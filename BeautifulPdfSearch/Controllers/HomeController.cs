@@ -22,7 +22,7 @@ namespace BeautifulPdfSearch.Controllers
         {
             Configuration = configuration;
         }
-        public IActionResult Index(List<SampleObject> result)
+        public IActionResult Index(List<SampleObject> result = null)
         {
             Config.ImageStorageConn = Configuration.GetSection("Storage")["imageurl"];
             Config.PdfStorageConn = Configuration.GetSection("Storage")["pdfurl"];
@@ -58,7 +58,7 @@ namespace BeautifulPdfSearch.Controllers
             {
                 if (formFile.Length > 0)
                 {
-                    var filePath = Path.GetTempPath() + Path.GetRandomFileName() + ".pdf";
+                    var filePath = Path.GetTempPath() + formFile.FileName;
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await formFile.CopyToAsync(stream);
@@ -69,7 +69,8 @@ namespace BeautifulPdfSearch.Controllers
 
             await ProcessPDF.AddPDFs(list);
 
-            return View("Index").WithSuccess("Sucess: ", "All PDFs was saved");
+            //return View("Index").WithSuccess("Sucess: ", "All PDFs was saved");
+            return View("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

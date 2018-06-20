@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PDFIndexer.Utils
@@ -15,9 +16,7 @@ namespace PDFIndexer.Utils
     {
         private static string rawTempPath = Config.TemporatyPath;
         private static string tempPath = rawTempPath + @"\out.pdf";
-        private static string gsPath = Path.Combine(Environment.CurrentDirectory,@"Ghost\gswin64c.exe");
-
-
+        private static string gsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Ghost\gswin64c.exe");
 
 
         public async static Task<List<SampleObject>> ProcessResults(IEnumerable<IndexMetadata> results, string keyword)
@@ -69,7 +68,7 @@ namespace PDFIndexer.Utils
             return objects;
         }
 
-        private static string GetPageImageUri(string document, int page )
+        private static string GetPageImageUri(string document, int page)
         {
             var container = ImageProcessing.GetContainer(Config.ImageStorageConn, "imagepdf");
             var blob = container.GetBlobReference($"{Path.GetFileNameWithoutExtension(document)}/page_{page}.jpg");
@@ -110,7 +109,7 @@ namespace PDFIndexer.Utils
             FileInfo f = new FileInfo(readerDoc);
 
             return ImageProcessing.UploadImages(pdfPageImageList, f.Name.Replace(".pdf", ""));
-        }   
+        }
 
         private static Stream CutImage(Stream _oldImage, float X, float Y, float W, float H)
         {
