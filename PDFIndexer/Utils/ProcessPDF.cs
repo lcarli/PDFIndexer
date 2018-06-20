@@ -60,7 +60,7 @@ namespace PDFIndexer.Utils
 
         private static async Task<string> UploadPDFs(string path)
         {
-            var container = GetContainer("{YOUR CONNECTION STRING}", "rawpdf");
+            var container = GetContainer(Config.PdfStorageConn, "rawpdf");
 
             container.CreateIfNotExistsAsync().GetAwaiter().GetResult();
 

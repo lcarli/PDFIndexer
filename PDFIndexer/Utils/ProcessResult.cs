@@ -13,7 +13,7 @@ namespace PDFIndexer.Utils
 {
     static class ProcessResult
     {
-        private static string rawTempPath = Path.Combine(Directory.GetCurrentDirectory(), "_temp");
+        private static string rawTempPath = Config.TemporatyPath;
         private static string tempPath = rawTempPath + @"\out.pdf";
         private static string gsPath = Path.Combine(Environment.CurrentDirectory,@"Ghost\gswin64c.exe");
 
@@ -69,7 +69,7 @@ namespace PDFIndexer.Utils
 
         private static string GetPageImageUri(string document, int page )
         {
-            var container = ImageProcessing.GetContainer("{YOUR CONNECTION STRING}", "imagepdf");
+            var container = ImageProcessing.GetContainer(Config.ImageStorageConn, "imagepdf");
             var blob = container.GetBlobReference($"{Path.GetFileNameWithoutExtension(document)}/page_{page}.jpg");
 
             return blob.Uri.ToString();

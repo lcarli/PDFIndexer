@@ -44,7 +44,7 @@ namespace PDFIndexer.Services
         public static List<string> UploadImages(Stream[] pdfPageImageList, string filename)
         {
             //Upload Pages in Patch
-            var container = GetContainer("{YOUR CONNECTION STRING}", "imagepdf");
+            var container = GetContainer(Config.ImageStorageConn, "imagepdf");
 
             container.CreateIfNotExistsAsync().GetAwaiter().GetResult();
 
