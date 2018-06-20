@@ -16,6 +16,16 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#add3").click(function (e) {
+                $("#ModalUpload").modal();
+                e.preventDefault();
+            });
+        })
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -32,13 +42,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Add">Add PDFs</a></li>
+                    <li><a asp-area="" id="add3">Add PDFs</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <partial name="_CookieConsentPartial" />
+
+    @await Html.PartialAsync("UploadPartial")
+
 
     <div class="container body-content">
         @RenderBody()

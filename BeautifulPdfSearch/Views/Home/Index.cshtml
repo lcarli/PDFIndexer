@@ -1,4 +1,10 @@
-﻿@{
+﻿@using PDFIndexer.CommomModels;
+@using System.IO;
+
+@model List<SampleObject>
+
+
+@{
     ViewData["Title"] = "PDF Search";
 
     var type = (string)TempData["_alert.type"];
@@ -19,8 +25,30 @@
 <br />
 
 
-
 <form class="form-wrapper cf" asp-action="Search" asp-controller="Home">
     <input type="text" placeholder="Search here..." required>
     <button type="submit">Search</button>
 </form>
+
+
+<br />
+<br />
+
+
+@if (Model != null || Model.Count < 1)
+{
+    foreach (var item in Model)
+    {
+        <div class="col-md-12">
+            <div>@System.IO.Path.GetFileNameWithoutExtension(item.Metadata.PDFURI)</div>
+
+            <div style="border: #286090 solid 2px;">
+                <div class="stretchy-wrapper" style="padding-bottom: 20%;">
+                    <div class="resultDescription" style="border: solid; border-width: 0px; background-image:url(@item.ImageUri); background-size:100%; background-position-y:44.72843450479233%; overflow: hidden;">
+                        <div class="highlight" style="position: absolute; width: @item.HighlightObject.HighlightedWords[0].Width%; height: @item.HighlightObject.HighlightedWords[0].Height%; left: @item.HighlightObject.HighlightedWords[0].X%; top: @item.HighlightObject.HighlightedWords[0].Y%;" title="" data-wikipedia=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

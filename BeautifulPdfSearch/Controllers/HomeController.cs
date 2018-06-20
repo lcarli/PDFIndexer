@@ -22,11 +22,12 @@ namespace BeautifulPdfSearch.Controllers
         {
             Configuration = configuration;
         }
-        public IActionResult Index()
+        public IActionResult Index(List<SampleObject> result)
         {
-            PDFIndexer.Utils.Config.ImageStorageConn = Configuration.GetSection("Storage")["imageurl"];
-            PDFIndexer.Utils.Config.PdfStorageConn = Configuration.GetSection("Storage")["pdfurl"];
-            return View();
+            Config.ImageStorageConn = Configuration.GetSection("Storage")["imageurl"];
+            Config.PdfStorageConn = Configuration.GetSection("Storage")["pdfurl"];
+
+            return View(result);
         }
 
 
@@ -41,7 +42,7 @@ namespace BeautifulPdfSearch.Controllers
 
             //Do something with the result
 
-            return View();
+            return RedirectToAction("Index", result);
         }
 
         [HttpPost("UploadFiles")]
