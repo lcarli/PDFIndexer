@@ -1,10 +1,9 @@
-﻿using PDFIndexer.CommomModels;
-using PDFIndexer.Search;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PDFIndexer.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
+
 
 namespace PDFIndexer
 {
@@ -12,16 +11,16 @@ namespace PDFIndexer
     {
         static void Main(string[] args)
         {
-            //TESTE
-            LuceneSearch.AddUpdateLuceneIndex<IndexMetadata>(DataForTest.GetAll());
+            string path = @"C:\Users\lucas\Desktop\IBAgro\BLOG - ARTIGO NÚMERO 05 - BANANA PASSA.pdf";
+            ProcessPDF.AddPDFs(new List<string>() { path });
 
-            var result = LuceneSearch.SearchDefault<IndexMetadata>("banana", "Text");
+            var result = ProcessPDF.GetVisualResults("banana");
 
-            var resultAll = LuceneSearch.GetAllIndexRecords<IndexMetadata>();
+            string json = JsonConvert.SerializeObject(result);
 
-            var bla = ProcessResult.ProcessResults(resultAll, "banana");
+            string jsonFormatted = JValue.Parse(json).ToString(Formatting.Indented);
 
-            Console.WriteLine("TERMINOU");
+            Console.WriteLine(jsonFormatted);
 
             Console.ReadKey();
         }
