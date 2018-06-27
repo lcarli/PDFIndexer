@@ -1,5 +1,6 @@
 ﻿using iText.IO.Image;
 using iText.Kernel.Pdf;
+using Newtonsoft.Json;
 using PDFIndexer.Base;
 using PDFIndexer.CommomModels;
 using PDFIndexer.Services;
@@ -131,6 +132,8 @@ namespace PDFIndexer.Utils
             List<HighlightObject> list = new List<HighlightObject>();
             int LastPage = 1;
 
+            Debug.WriteLine(JsonConvert.SerializeObject(input.ListOfWords));
+
             foreach (var word in input.ListOfWords)
             {
                 if (keyword.ToLower() == word.Text.ToLower().TrimStart().TrimEnd())
@@ -138,40 +141,42 @@ namespace PDFIndexer.Utils
                     if (word.page == LastPage)
                     {
                         words.Add(word);
-                        wordPerPage.Add(words);
                     }
                     else
                     {
                         LastPage = word.page;
-                        wordPerPage.Add(words);
+                        wordPerPage.Add(new List<PdfMetadata>(words));
                         words.Clear();
                         words.Add(word);
                     }
                 }
             }
 
-            foreach (var item in wordPerPage)
+            //adding last list of words (last page)
+            wordPerPage.Add(new List<PdfMetadata>(words));
+
+            foreach (var pages in wordPerPage)
             {
-                list.Add(new HighlightObject
+                foreach (var item in pages)
                 {
-                    Metadata = input,
-                    HighlightedWords = ConvertWord2BoundingBox(item),
-                    Keyword = keyword,
-                    PageNumber = item[0].page
-                });
+                    list.Add(new HighlightObject
+                    {
+                        Metadata = input,
+                        HighlightedWords = ConvertWord2BoundingBox(item),
+                        Keyword = keyword,
+                        PageNumber = item.page
+                    });
+                }
             }
 
             return list;
         }
 
-        private static List<BoundingBox> ConvertWord2BoundingBox(List<PdfMetadata> words)
+        private static List<BoundingBox> ConvertWord2BoundingBox(PdfMetadata word)
         {
             List<BoundingBox> list = new List<BoundingBox>();
 
-            foreach (var word in words)
-            {
-                list.Add(new BoundingBox { X = word.X, Y = word.Y, Height = word.Height, Width = word.Width });
-            }
+            list.Add(new BoundingBox { X = word.X, Y = word.Y, Height = word.Height, Width = word.Width });
 
             return list;
         }

@@ -1,0 +1,17 @@
+﻿div.stretchy-wrapper > div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.highlight {
+    opacity: 0.5;
+    filter: alpha(opacity = 30);
+    background-color: yellow;
+}
+
+.resultDescription {
+    margin: 18px 17px 2px 17px;
+}

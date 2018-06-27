@@ -34,7 +34,14 @@ namespace BeautifulPdfSearch.Controllers
             else
             {
                 List<SampleObject> result = await ProcessPDF.GetVisualResults(text);
-                return View(result);
+                if (result.Count > 0)
+                {
+                    return View(result);
+                }
+                else
+                {
+                    return View().WithWarning("Oops. ", "We couldn't find this word...");
+                }
             }
 
         }
