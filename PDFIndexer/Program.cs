@@ -11,10 +11,10 @@ namespace PDFIndexer
     {
         static void Main(string[] args)
         {
-            string path = @"C:\Users\lucas\Desktop\IBAgro\BLOG - ARTIGO NÚMERO 05 - BANANA PASSA.pdf";
+            string path = @"{path of document}";
             ProcessPDF.AddPDFs(new List<string>() { path });
 
-            var result = ProcessPDF.GetVisualResults("banana");
+            var result = ProcessPDF.GetVisualResults("{your search word}");
 
             string json = JsonConvert.SerializeObject(result);
 

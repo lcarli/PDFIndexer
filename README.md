@@ -7,7 +7,12 @@ Useful and easy way to get text from pdf (including metadata)
 
 # Architecture #
 
- * Creating a Nuget pack, yet.
+ * https://www.nuget.org/packages/PDFParser-CSharp/
+
+ To Install using Nuget PM
+ ```
+ Install-Package PDFParser-CSharp -Version 1.2.1
+ ```
 
 
 ## How to use ##
