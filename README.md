@@ -4,6 +4,9 @@ PDFIndexer
 
 Useful and easy way to get text from pdf (including metadata)
 
+Which a single line you can add a batch of PDF's
+And with other single line you can search exactly where she is on the text (or more!)
+
 
 # Architecture #
 
@@ -16,6 +19,16 @@ Useful and easy way to get text from pdf (including metadata)
 
 
 ## How to use ##
+
+General use:
+``` CSharp
+    //TO ADD A BATCH OF PDF'S
+    ProcessPDF.AddPDFs(new List<string>() { path });
+    
+    //TO SEARCH OVER THEM
+    var result = ProcessPDF.GetVisualResults("{your search word}");
+```
+
 
 To use:
 ``` CSharp
@@ -38,6 +51,30 @@ GeIndexMetadata -> To create a hOCR or other xml pattern page, we have this clas
 
 
 In all cases you can use string or stream to pass the pdf document.
+
+
+## Main Methods ##
+
+* AddPDFs -> receive a list of strings to process and save
+* GetVisualResults -> Recieve a string and search on the metadata database
+** The result should be a list of SampleObject with the word, the position and others metadatas for each word found
+    ``` CSharp
+    {
+        HighlightObject = {
+            IndexMetadata Metadata
+            List<BoundingBox> HighlightedWords
+            string Keyword
+            int PageNumber
+        },
+        Metadata = {
+            string Text
+            List<PdfMetadata> ListOfLines
+            List<PdfMetadata> ListOfWords
+            string PDFURI
+        },
+        ImageUri = "https://{uri_image_path}"
+    };
+    ```
 
 
 ## Expected Results ##
