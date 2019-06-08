@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class IdentifyTablesData : IProcessBlockData
+    public class IdentifyTablesData : IProcessBlockData
     {
         public bool Ready { get; set; }
         public BlockPage PageTables { get; set; }

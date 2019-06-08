@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class ValidatePositiveCoordinates : IValidateBlock
+    public class ValidatePositiveCoordinates : IValidateBlock
     {
         public BlockPage Validate(BlockPage page)
         {

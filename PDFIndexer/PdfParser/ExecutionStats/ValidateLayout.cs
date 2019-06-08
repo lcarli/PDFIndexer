@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.ExecutionStats
 {
-    class ValidateLayout : ICalculateStats<StatsPageLayout>
+    public class ValidateLayout : ICalculateStats<StatsPageLayout>
     {
         const string ERRORMSG = "ERROR: ";
 

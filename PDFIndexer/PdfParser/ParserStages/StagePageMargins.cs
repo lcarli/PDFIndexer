@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PDFIndexer.ParserStages
 {
-    class StagePageMargins
+    public class StagePageMargins
     {
         private readonly StageContext _context;
 

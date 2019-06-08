@@ -22,7 +22,7 @@ using PDFIndexer.CommomModels;
 
 namespace PDFIndexer.Utils
 {
-    class TextExtractor
+    public class TextExtractor
     {
         public Pipeline pipeline;
         public TextExtractor()

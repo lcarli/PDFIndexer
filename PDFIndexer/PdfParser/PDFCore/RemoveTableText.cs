@@ -7,7 +7,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveTableText : IProcessBlock
+    public class RemoveTableText : IProcessBlock
     {
         private List<IBlock> _tables;
 

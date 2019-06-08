@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class ResizeBlocksetsColumn : IProcessBlock
+    public class ResizeBlocksetsColumn : IProcessBlock
     {
         const float COLUMN_DISTANCE = 10f;
 

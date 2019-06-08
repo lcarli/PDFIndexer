@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class StatsBlocksOverlapped
+    public class StatsBlocksOverlapped
     {
         public static StatsBlocksOverlapped Empty = new StatsBlocksOverlapped();
 

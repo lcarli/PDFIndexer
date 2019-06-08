@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class FinalBlockResultData : IProcessBlockData
+    public class FinalBlockResultData : IProcessBlockData
     {
         public BlockPage LastResult { get; private set; }
 

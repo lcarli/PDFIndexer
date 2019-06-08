@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.Execution
 {
-    class PipelineStats
+    public class PipelineStats
     {
         private List<object> _statsCollection;
         private List<List<object>> _statsCollectionPerPage;

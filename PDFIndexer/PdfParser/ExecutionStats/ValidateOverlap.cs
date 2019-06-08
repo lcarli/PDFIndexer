@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.ExecutionStats
 {
-    class ValidateOverlap : ICalculateStats<StatsBlocksOverlapped>
+    public class ValidateOverlap : ICalculateStats<StatsBlocksOverlapped>
     {
         public IList<StatsBlocksOverlapped> Results { get; private set; }
 

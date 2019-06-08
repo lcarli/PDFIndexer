@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.Parser
 {
-    class Anexo
+    public class Anexo
     {
         public string Texto { get; set; }
         public string Titulo { get; set; }

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PDFIndexer.PDFCore
 {
-    class GroupLines : IProcessBlock
+    public class GroupLines : IProcessBlock
     {
         const float LARGE_SPACE_BETWEEN_WORDS = 10f;
         const float MINIMUM_CHARACTER_DISTANCE = 5f;

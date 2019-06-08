@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Execution
 {
-    class PipelineDocumentStats
+    public class PipelineDocumentStats
     {
         public float X;
         public float H;

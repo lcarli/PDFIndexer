@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace PDFIndexer.Parser
 {
-    class FilterTextSegments : IAggregateStructure<TextSegment, TextSegment>
+    public class FilterTextSegments : IAggregateStructure<TextSegment, TextSegment>
     {
         TextStructure _lastIgnored = null;
         TextSegment _textSegment = null;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class TextStructureAgg
+    public class TextStructureAgg
     {
         public TextStructure TextStruct;
         public bool SameFont;

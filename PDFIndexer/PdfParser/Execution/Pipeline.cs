@@ -7,7 +7,7 @@ using PDFIndexer.Configuration;
 
 namespace PDFIndexer.Execution
 {
-    class Pipeline : IDisposable
+    public class Pipeline : IDisposable
     {
         private IConfigurationStore _configStore;
         private string _inputFilename = null;

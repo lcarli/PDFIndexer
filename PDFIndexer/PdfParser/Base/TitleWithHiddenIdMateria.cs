@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class TitleWithHiddenIdMateria
+    public class TitleWithHiddenIdMateria
     {
         const string IDMATERIA_SEPARATOR_START = "((IDMATERIA=";
         static readonly string[] IDMATERIA_SEPARATOR_END = new string[] { ")) " };

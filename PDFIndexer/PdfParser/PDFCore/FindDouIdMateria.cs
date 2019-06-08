@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class FindDouIdMateria : IProcessBlock
+    public class FindDouIdMateria : IProcessBlock
     {
         const float CONSIDERED_VERY_SMALL_FONTSIZE = 0.3f;
         const float SAME_LINE_SMALL_FONTSIZE = 0.1f;

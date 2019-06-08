@@ -10,7 +10,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class ProcessImageData : IProcessBlockData
+    public class ProcessImageData : IProcessBlockData
     {
         private BlockSet<IBlock> _blockSet = new BlockSet<IBlock>();
 

@@ -7,7 +7,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class AddTableSpace : IProcessBlock
+    public class AddTableSpace : IProcessBlock
     {
         private List<IBlock> _tables;
 

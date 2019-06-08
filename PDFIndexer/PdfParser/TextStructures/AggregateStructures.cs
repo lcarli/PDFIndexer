@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.TextStructures
 {
-    class AggregateStructures : IAggregateStructure<TextStructureAgg, TextStructure>
+    public class AggregateStructures : IAggregateStructure<TextStructureAgg, TextStructure>
     {
         TextStructureAgg _current;
 

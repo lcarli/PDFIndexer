@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.ExecutionStats
 {
-    static class PrintDebugExtensions
+    public static class PrintDebugExtensions
     {
         public static PipelineText<T> DebugCount<T>(this PipelineText<T> pipelineText)
         {

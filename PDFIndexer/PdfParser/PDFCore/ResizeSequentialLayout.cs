@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class ResizeSequentialLayout : IProcessBlock
+    public class ResizeSequentialLayout : IProcessBlock
     {
         const float WIDTH_DIFFERENCE = 2f;
 

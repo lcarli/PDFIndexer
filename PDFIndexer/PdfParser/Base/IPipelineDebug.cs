@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IPipelineDebug
+    public interface IPipelineDebug
     {
         void ShowLine(TextLine line, System.Drawing.Color color);
         void ShowLine(IEnumerable<TextLine> lines, System.Drawing.Color color);

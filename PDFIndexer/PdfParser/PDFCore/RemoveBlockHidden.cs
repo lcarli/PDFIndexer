@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveBlockHidden : IProcessBlock, IValidateBlock
+    public class RemoveBlockHidden : IProcessBlock, IValidateBlock
     {
         public BlockPage Process(BlockPage page)
         {

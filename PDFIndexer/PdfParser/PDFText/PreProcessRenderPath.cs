@@ -10,7 +10,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFText
 {
-    class PreProcessRenderPath : IEventListener, IPipelineResults<BlockPage>
+    public class PreProcessRenderPath : IEventListener, IPipelineResults<BlockPage>
     {
         private readonly List<EventType> _supportedEvents = new List<EventType>() { EventType.RENDER_PATH };
 

@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace PDFIndexer.PDFText
 {
-    class ProcessPdfText : IEventListener, IPipelineResults<BlockPage>
+    public class ProcessPdfText : IEventListener, IPipelineResults<BlockPage>
     {
         private readonly List<EventType> _supportedEvents = new List<EventType>() { EventType.RENDER_TEXT };
 

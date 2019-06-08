@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Execution
 {
-    class PipelinePageStats<T>
+    public class PipelinePageStats<T>
     {
         T _internalProperty;
     }

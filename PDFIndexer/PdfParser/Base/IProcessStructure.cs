@@ -4,12 +4,12 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IProcessStructure<T>
+    public interface IProcessStructure<T>
     {
         T Process(T structure);
     }
 
-    interface IProcessStructure2<T>
+    public interface IProcessStructure2<T>
     {
         IEnumerable<T> Process(IEnumerable<T> input);
     }

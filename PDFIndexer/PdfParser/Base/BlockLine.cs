@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockLine : Block
+    public class BlockLine : Block
     {
         public BlockLine()
         {

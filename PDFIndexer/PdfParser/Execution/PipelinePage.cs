@@ -10,7 +10,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Execution
 {
-    class PipelinePage
+    public class PipelinePage
     {
         public IPipelinePdfContext Context { get; }
         public int PageNumber { get; }

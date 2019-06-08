@@ -5,7 +5,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.ExecutionStats
 {
-    class TextInfo
+    public class TextInfo
     {
         public string FontName;
         public float FontSize;

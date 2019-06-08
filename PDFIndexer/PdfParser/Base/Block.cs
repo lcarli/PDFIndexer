@@ -5,7 +5,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer
 {
-    class Block : IBlock
+    public class Block : IBlock
     {
         public string Text { get; set; }
         public float X { get; set; }

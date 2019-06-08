@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Parser
 {
-    class Artigo
+    public class Artigo
     {
         public Metadados Metadados { get; set; }
         public Conteudo Conteudo { get; set; }

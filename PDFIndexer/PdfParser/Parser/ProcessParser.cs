@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Parser
 {
-    class ProcessParser
+    public class ProcessParser
     {
         int countPerPage = 1;
         string initialPage = "0001";

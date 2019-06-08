@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockPageSegment : BlockSet<BlockColumn>
+    public class BlockPageSegment : BlockSet<BlockColumn>
     {
         public int NumberOfColumns { get; private set; }
         public IEnumerable<BlockColumn> Columns => this.Cast<BlockColumn>();

@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveOverlapedImages : IProcessBlock, IValidateBlock
+    public class RemoveOverlapedImages : IProcessBlock, IValidateBlock
     {
         //private List<IBlock> _images;
         private PreProcessImages _parse;

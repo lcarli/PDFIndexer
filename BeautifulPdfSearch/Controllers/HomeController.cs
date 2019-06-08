@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using PDFIndexer.CommomModels;
 using PDFIndexer.Utils;
+using Microsoft.WindowsAzure.Storage;
 
 namespace BeautifulPdfSearch.Controllers
 {
@@ -26,6 +27,8 @@ namespace BeautifulPdfSearch.Controllers
         {
             Config.ImageStorageConn = Configuration.GetSection("Storage")["imageurl"];
             Config.PdfStorageConn = Configuration.GetSection("Storage")["pdfurl"];
+
+            ViewData["countFiles"] = await CountFiles();
 
             if (String.IsNullOrWhiteSpace(text))
             {
@@ -44,6 +47,28 @@ namespace BeautifulPdfSearch.Controllers
                 }
             }
 
+        }
+
+
+        private async Task<int> CountFiles()
+        {
+            try
+            {
+                List<string> list = new List<string>();
+                var storageAccount = CloudStorageAccount.Parse(Config.PdfStorageConn);
+                var client = storageAccount.CreateCloudBlobClient();
+                var container = client.GetContainerReference("rawpdf");
+                var result = await container.ListBlobsSegmentedAsync(null);
+                foreach (var item in result.Results)
+                {
+                    list.Add(item.Uri.AbsoluteUri);
+                }
+                return list.Count;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
 

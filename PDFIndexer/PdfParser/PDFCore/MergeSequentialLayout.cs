@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class MergeSequentialLayout : IProcessBlock
+    public class MergeSequentialLayout : IProcessBlock
     {
         const float VERTICAL_LINE_DIFFERENCE = .5f;
 

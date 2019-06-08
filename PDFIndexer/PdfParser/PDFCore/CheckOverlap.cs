@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class CheckOverlap : IProcessBlock, IValidateBlock, IRetrieveStatistics
+    public class CheckOverlap : IProcessBlock, IValidateBlock, IRetrieveStatistics
     {
         StatsBlocksOverlapped _overlappedBlocks = StatsBlocksOverlapped.Empty;
 

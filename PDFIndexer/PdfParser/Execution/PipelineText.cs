@@ -9,7 +9,7 @@ using System.IO;
 
 namespace PDFIndexer.Execution
 {
-    class PipelineText<TT> : IDisposable
+    public class PipelineText<TT> : IDisposable
     {
         public IPipelineContext Context { get; }
         public IEnumerable<TT> CurrentStream;

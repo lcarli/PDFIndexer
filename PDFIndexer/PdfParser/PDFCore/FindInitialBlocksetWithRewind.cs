@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class FindInitialBlocksetWithRewind : IProcessBlock
+    public class FindInitialBlocksetWithRewind : IProcessBlock
     {
         private float statDownInTheBottom = 100f;
         private float statGoingUp = 5f;

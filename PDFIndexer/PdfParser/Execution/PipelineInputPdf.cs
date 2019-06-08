@@ -15,7 +15,7 @@ using PDFIndexer.ExecutionStats;
 
 namespace PDFIndexer.Execution
 {
-    class PipelineInputPdf : IPipelinePdfContext, IDisposable
+    public class PipelineInputPdf : IPipelinePdfContext, IDisposable
     {
         private readonly string _input;
         private PdfDocument _pdfDocument;

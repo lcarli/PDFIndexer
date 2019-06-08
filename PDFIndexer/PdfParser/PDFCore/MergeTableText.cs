@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class MergeTableText : IProcessBlock, IValidateBlock
+    public class MergeTableText : IProcessBlock, IValidateBlock
     {
         private List<IBlock> _tables;
         private List<IBlock> _tableLines;

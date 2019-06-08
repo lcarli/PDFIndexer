@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveImageLineFromHeaderFooter : IProcessBlock
+    public class RemoveImageLineFromHeaderFooter : IProcessBlock
     {
         private float _headerH = float.NaN;
         private float _footerH = float.NaN;

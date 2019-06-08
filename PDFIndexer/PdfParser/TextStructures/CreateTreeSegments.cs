@@ -7,7 +7,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Parser
 {
-    class CreateTreeSegments : IAggregateStructure<TextSegment, TextSegment>
+    public class CreateTreeSegments : IAggregateStructure<TextSegment, TextSegment>
     {
         bool _shouldNotContinue = false;
         TextSegment _current = null;

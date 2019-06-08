@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveHeader : IProcessBlock, IValidateBlock
+    public class RemoveHeader : IProcessBlock, IValidateBlock
     {
         const float statRegionTooLarge = 200f;
 

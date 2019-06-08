@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class AddImageSpace : IProcessBlock
+    public class AddImageSpace : IProcessBlock
     {
         private List<IBlock> _images;
 

@@ -18,6 +18,12 @@
     <link rel="stylesheet" href="~/css/CropContainercss.css" />
 </head>
 
+<div class="pull-right">You have @ViewData["countFiles"] files</div>
+@if (Model != null)
+{
+    <br />
+    <div class="pull-right">We found @Model.Count files</div>
+}
 
 @if (!string.IsNullOrEmpty(type))
 {
@@ -33,7 +39,7 @@
 
 <form class="form-wrapper cf" asp-action="Index" asp-controller="Home" method="post" role="form">
     <div class="form-group">
-        <input id="text" name="text" type="text" placeholder="Search here..." required style="color: black">
+        <input id="text" name="text" type="text" placeholder="Search here... (Ex.: banana)" required style="color: black">
         <button type="submit">Search</button>
     </div>
 </form>
@@ -48,7 +54,8 @@
     foreach (var item in Model)
     {
 
-        float offset = ((@item.HighlightObject.HighlightedWords[0].Y/1693)*100)+10;
+        //Calculations
+        float offset = ((@item.HighlightObject.HighlightedWords[0].Y / 1693) * 100) + 10;
         float wordWidth = @item.HighlightObject.HighlightedWords[0].Width;
         float wordHeight = @item.HighlightObject.HighlightedWords[0].Height;
         float wordX = @item.HighlightObject.HighlightedWords[0].X;

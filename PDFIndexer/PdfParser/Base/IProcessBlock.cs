@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IProcessBlock
+    public interface IProcessBlock
     {
         BlockPage Process(BlockPage page);
     }

@@ -9,7 +9,7 @@ namespace PDFIndexer.PDFCore
     // bug #37: "omisses" can span multiple columns
     // proposed fix: decrease the width
     // should be run after GroupLines, to prevent cases where omisses are broken
-    class DouIgnoreLongDotSequence : IProcessBlock
+    public class DouIgnoreLongDotSequence : IProcessBlock
     {        
         public BlockPage Process(BlockPage page)
         {

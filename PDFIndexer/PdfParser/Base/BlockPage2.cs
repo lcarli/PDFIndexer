@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockPage2 : BlockPage
+    public class BlockPage2 : BlockPage
     {
         List<BlockPageSegment> _segments = new List<BlockPageSegment>();
 

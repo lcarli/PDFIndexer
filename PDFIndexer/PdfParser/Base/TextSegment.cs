@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class TextSegment
+    public class TextSegment
     {
         public TextStructure[] OriginalTitle { get; set; }
         public TextStructure[] Title { get; set; }

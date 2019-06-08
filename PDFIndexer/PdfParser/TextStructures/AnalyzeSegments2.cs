@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.TextStructures
 {
-    class AnalyzeSegments2 : ILogStructure<TextSegment>
+    public class AnalyzeSegments2 : ILogStructure<TextSegment>
     {
         public void EndLog(TextWriter input)
         {

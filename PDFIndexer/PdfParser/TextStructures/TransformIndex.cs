@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.TextStructures
 {
-    interface ITransformIndex
+    public interface ITransformIndex
     {
         object GetStart(object instance);
         object FindObject(object instance);
@@ -16,7 +16,7 @@ namespace PDFIndexer.TextStructures
         int GetObjectId(object instance);
     }
 
-    class TransformIndex<TI,TO> : ITransformIndex
+    public class TransformIndex<TI,TO> : ITransformIndex
     {
         int _position;
         Dictionary<TO,int> _lookup = new Dictionary<TO, int>();

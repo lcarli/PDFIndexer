@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface ICalculateStats<T>
+    public interface ICalculateStats<T>
     {
         object Calculate(IEnumerable<T> stats);
     }

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace PDFIndexer.ParserStages
 {
-    class StageConvertTree
+    public class StageConvertTree
     {
         private readonly string _input;
         private readonly string _output;

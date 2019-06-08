@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PdfParser.PDFCore
 {
-    class GroupWords : IProcessBlock
+    public class GroupWords : IProcessBlock
     {
         public BlockPage Process(BlockPage page)
         {

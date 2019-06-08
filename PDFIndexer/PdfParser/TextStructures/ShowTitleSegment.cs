@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.TextStructures
 {
-    class ShowTitleSegment : ILogStructurePdf<TextSegment>
+    public class ShowTitleSegment : ILogStructurePdf<TextSegment>
     {
         int _id = 0;
 

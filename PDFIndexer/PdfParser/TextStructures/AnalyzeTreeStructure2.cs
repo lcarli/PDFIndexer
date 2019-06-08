@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PDFIndexer.TextStructures
 {
-    class AnalyzeTreeStructure2 : ILogStructure2<TextSegment>
+    public class AnalyzeTreeStructure2 : ILogStructure2<TextSegment>
     {
         ITransformIndexTree _index;
         Stack<string> _currentTree = new Stack<string>();

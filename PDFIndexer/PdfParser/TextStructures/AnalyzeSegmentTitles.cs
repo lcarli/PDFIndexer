@@ -6,7 +6,7 @@ using System.IO;
 
 namespace PDFIndexer.TextStructures
 {
-    class AnalyzeSegmentTitles : ILogStructure<TextSegment>
+    public class AnalyzeSegmentTitles : ILogStructure<TextSegment>
     {
         public void StartLog(TextWriter input)
         {

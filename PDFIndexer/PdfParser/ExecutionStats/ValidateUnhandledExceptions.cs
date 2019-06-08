@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.ExecutionStats
 {
-    class ValidateUnhandledExceptions : ICalculateStats<StatsExceptionHandled>
+    public class ValidateUnhandledExceptions : ICalculateStats<StatsExceptionHandled>
     {
         public IList<StatsExceptionHandled> Results { get; private set; }
 

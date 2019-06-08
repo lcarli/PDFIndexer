@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IAggregateStructure<TI, TO>
+    public interface IAggregateStructure<TI, TO>
     {
         void Init(TI line);
 

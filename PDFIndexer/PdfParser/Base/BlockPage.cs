@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockPage
+    public class BlockPage
     {
         BlockSet<IBlock> _blocks;
 

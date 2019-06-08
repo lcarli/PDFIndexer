@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.Execution
 {
-    class PipelinePdfLog
+    public class PipelinePdfLog
     {
         List<PipelinePdfLogEntry> _log = new List<PipelinePdfLogEntry>();
 

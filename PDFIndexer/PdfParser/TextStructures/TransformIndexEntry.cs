@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.TextStructures
 {
-    class TransformIndexEntry<TI, TO>
+    public class TransformIndexEntry<TI, TO>
     {
         public int Id { get; set; }
         public TO Key { get; set; }
@@ -12,7 +12,7 @@ namespace PDFIndexer.TextStructures
         public TI End { get; set; }
         public List<TI> Items { get; set; }
     }
-    class TransformIndexEntry2<T>
+    public class TransformIndexEntry2<T>
     {
         public int Id { get; set; }
         public T Key { get; set; }

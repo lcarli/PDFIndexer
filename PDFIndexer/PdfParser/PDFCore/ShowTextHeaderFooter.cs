@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class ShowTextHeaderFooter : IProcessBlock, IValidateBlock
+    public class ShowTextHeaderFooter : IProcessBlock, IValidateBlock
     {
         private float _headerH = float.NaN;
         private float _footerH = float.NaN;

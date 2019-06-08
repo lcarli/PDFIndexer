@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Execution
 {
-    static class PipelineDebug
+    public static class PipelineDebug
     {
         static public void Output(PipelineInputPdf pdf, string filename)
         {

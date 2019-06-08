@@ -4,15 +4,15 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IBlockSet 
+    public interface IBlockSet 
     {
     }
 
-    interface IBlockSet<T> : IBlock, IEnumerable<T>
+    public interface IBlockSet<T> : IBlock, IEnumerable<T>
     {
     }
 
-    interface IBlockArea : IBlockSet<IBlock>
+    public interface IBlockArea : IBlockSet<IBlock>
     {
     }
 }

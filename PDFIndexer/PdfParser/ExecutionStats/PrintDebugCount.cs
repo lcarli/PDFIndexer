@@ -6,7 +6,7 @@ using System.IO;
 
 namespace PDFIndexer.ExecutionStats
 {
-    class PrintDebugCount<T> : ILogStructure<T>
+    public class PrintDebugCount<T> : ILogStructure<T>
     {
         string _message = typeof(T).Name;
         int _count = 0;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class MarkLine : IBlock
+    public class MarkLine : IBlock
     {
         public const int ORANGE = 10210;
         public const int YELLOW = 10220;

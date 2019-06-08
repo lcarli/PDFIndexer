@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.TextStructures
 {
-    class ProcessStructure2
+    public class ProcessStructure2
     {
         float Tolerance = 3;
         public IEnumerable<TextStructure> ProcessParagraph(IEnumerable<TextLine> lineSet)

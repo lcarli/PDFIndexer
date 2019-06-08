@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockArea : BlockSet<IBlock>
+    public class BlockArea : BlockSet<IBlock>
     {
     }
 }

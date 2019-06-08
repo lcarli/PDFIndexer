@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.Execution
 {
-    class PipelineFactory : IDisposable
+    public class PipelineFactory : IDisposable
     {
         Dictionary<Type, object> _dictionary = new Dictionary<Type, object>();
         static IContainer g_defaultScope;

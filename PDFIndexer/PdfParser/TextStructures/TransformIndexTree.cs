@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.TextStructures
 {
-    class TransformIndexTree : ITransformIndexTree
+    public class TransformIndexTree : ITransformIndexTree
     {
         List<ITransformIndex> _indexes = new List<ITransformIndex>();
         List<Type> _indexOutputType = new List<Type>();
