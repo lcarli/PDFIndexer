@@ -14,7 +14,7 @@ And with other single line you can search exactly where she is on the text (or m
 
  To Install using Nuget PM
  ```
- Install-Package PDFParser-CSharp -Version 1.2.1
+ Install-Package PDFParser-CSharp -Version 1.2.2
  ```
 
 
