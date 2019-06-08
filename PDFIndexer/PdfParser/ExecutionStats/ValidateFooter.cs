@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.ExecutionStats
 {
-    class ValidateFooter : ICalculateStats<StatsPageFooter>
+    public class ValidateFooter : ICalculateStats<StatsPageFooter>
     {
         const float statRegionTooLarge = 200f;
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class StatsExceptionHandled
+    public class StatsExceptionHandled
     {
         private readonly int _pageNumber;
         private readonly Exception _exception;

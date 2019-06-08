@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace PDFIndexer.Utils
 {
-    static class ProcessPDF
+    public static class ProcessPDF
     {
-        public static async void AddPDFs(List<string> uris)
+        public static async Task AddPDFs(List<string> uris)
         {
             //Instance of TextExtractor
             TextExtractor te = new TextExtractor();
@@ -35,17 +35,15 @@ namespace PDFIndexer.Utils
             //Index to LUCENE
             LuceneSearch.AddUpdateLuceneIndex<IndexMetadata>(metadatas);
 
-
-            //Criar referencia entre o PDF e a lista de imagens
-
+            await Task.CompletedTask;
 
         }
 
-        public static List<SampleObject> GetVisualResults(string keyword)
+        public static async Task<List<SampleObject>> GetVisualResults(string keyword)
         {
             var result = LuceneSearch.SearchDefault<IndexMetadata>(keyword, "Text");
 
-            return ProcessResult.ProcessResults(result, keyword);
+            return await ProcessResult.ProcessResults(result, keyword);
         }
 
         private static List<string> Convert2Image(string path)

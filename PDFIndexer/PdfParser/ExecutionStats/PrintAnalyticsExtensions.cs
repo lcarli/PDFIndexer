@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.ExecutionStats
 {
-    static class PrintAnalyticsExtensions
+    public static class PrintAnalyticsExtensions
     {
         public static PipelineText<TextLine> PrintAnalytics(this PipelineText<TextLine> pipelineText, string filename)
         {

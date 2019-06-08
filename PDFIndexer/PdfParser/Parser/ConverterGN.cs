@@ -7,7 +7,7 @@ using System.IO;
 
 namespace PDFIndexer.Parser
 {
-    class ConverterGN
+    public class ConverterGN
     {
         public string Convert(string pdf, string article, string content)
         {

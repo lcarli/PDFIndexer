@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PDFIndexer.ParserStages
 {
-    class StageDbgFlow
+    public class StageDbgFlow
     {
         private readonly string _input;
         private readonly string _output;

@@ -5,7 +5,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class ReplaceCharacters : IProcessBlock
+    public class ReplaceCharacters : IProcessBlock
     {
         const float MINIMUM_CHARACTER_OVERLAP = .5f;
         const float INTERSECTION_FONT_PERCENT = .8f;

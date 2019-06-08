@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class StatsPageFooter
+    public class StatsPageFooter
     {
         public bool HasFooter;
         public float? FooterHeight;

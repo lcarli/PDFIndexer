@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace PDFIndexer.Parser
 {
-    class HifenUtil
+    public class HifenUtil
     {
         static Regex _pattern = new Regex(@"(-[mst])?(.)-\n([^ ]+( )?)");
 

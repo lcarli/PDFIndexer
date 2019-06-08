@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IValidateBlock
+    public interface IValidateBlock
     {
         BlockPage Validate(BlockPage page);
     }

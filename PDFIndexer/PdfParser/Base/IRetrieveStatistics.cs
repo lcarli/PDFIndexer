@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IRetrieveStatistics
+    public interface IRetrieveStatistics
     {
         object RetrieveStatistics();
     }

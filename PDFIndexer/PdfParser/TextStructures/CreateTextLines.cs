@@ -7,7 +7,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.TextStructures
 {
-    class CreateTextLines : IConvertBlock
+    public class CreateTextLines : IConvertBlock
     {
         public IEnumerable<TextLine> ProcessPage(int pageNumber, BlockPage page)
         {

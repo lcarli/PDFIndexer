@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveImageTexts : IProcessBlock
+    public class RemoveImageTexts : IProcessBlock
     {
         private List<IBlock> _images;
 

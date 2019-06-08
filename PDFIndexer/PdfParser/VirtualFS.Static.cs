@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    partial class VirtualFS : IVirtualFS
+    public partial class VirtualFS : IVirtualFS
     {   
         public static Stream OpenRead(string filename)
         {

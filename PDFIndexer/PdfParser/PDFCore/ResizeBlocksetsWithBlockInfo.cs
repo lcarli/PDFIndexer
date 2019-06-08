@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class ResizeBlocksetsWithBlockInfo : IProcessBlock
+    public class ResizeBlocksetsWithBlockInfo : IProcessBlock
     {
         private readonly BlockPage2 _blocksetInfo;
 

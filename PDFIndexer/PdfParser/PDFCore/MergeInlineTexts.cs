@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class MergeInlineTexts : IProcessBlock
+    public class MergeInlineTexts : IProcessBlock
     {
         public BlockPage Process(BlockPage page)
         {

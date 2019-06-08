@@ -9,7 +9,7 @@ using System.Text;
 
 namespace PDFIndexer.Execution
 {
-    class PipelineDebugContext : IPipelineDebug, IDisposable
+    public class PipelineDebugContext : IPipelineDebug, IDisposable
     {
         private PdfDocument _pdf;
         private int _lastPageNumber = -1;

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.ParserStages
 {
-    class StageContext : IDisposable
+    public class StageContext : IDisposable
     {
         private PipelineFactory _factoryContext;
         private Pipeline _pipeline;

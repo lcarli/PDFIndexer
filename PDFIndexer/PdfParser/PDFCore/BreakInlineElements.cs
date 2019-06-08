@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class BreakInlineElements : IProcessBlock, IValidateBlock
+    public class BreakInlineElements : IProcessBlock, IValidateBlock
     {
         public BlockPage Process(BlockPage page)
         {

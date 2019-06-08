@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace PDFIndexer.Parser
 {
-    class ProcessParserJson
+    public class ProcessParserJson
     {
         public void Write(Artigo artigo, string doc)
         {

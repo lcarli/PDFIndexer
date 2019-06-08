@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class ImageBlock : IBlock
+    public class ImageBlock : IBlock
     {
         public float X;
         public float H;

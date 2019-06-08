@@ -5,7 +5,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class FindInitialBlockset : IProcessBlock
+    public class FindInitialBlockset : IProcessBlock
     {
         // TODO: set it back to 100f or less
         private float statDownInTheBottom = 100f;

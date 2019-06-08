@@ -6,14 +6,14 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface ILogStructure<T>
+    public interface ILogStructure<T>
     {
         void StartLog(TextWriter input);
         void Log(TextWriter input, T data);
         void EndLog(TextWriter input);
     }
 
-    interface ILogStructure2<T> : ILogStructure<T>
+    public interface ILogStructure2<T> : ILogStructure<T>
     {
         void Init(ITransformIndexTree index);
     }

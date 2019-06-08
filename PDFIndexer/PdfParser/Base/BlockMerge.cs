@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockMerge : IBlockSet<IBlock>
+    public class BlockMerge : IBlockSet<IBlock>
     {
         BlockSet<IBlock> _blocks = new BlockSet<IBlock>();
         List<BlockSet<IBlock>> _list = new List<BlockSet<IBlock>>();

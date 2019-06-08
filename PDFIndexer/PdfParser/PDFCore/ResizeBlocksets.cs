@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class ResizeBlocksets : IProcessBlock, IValidateBlock
+    public class ResizeBlocksets : IProcessBlock, IValidateBlock
     {
         private List<Data> Values { get; set; }
         private List<Data> ValuesY { get; set; }

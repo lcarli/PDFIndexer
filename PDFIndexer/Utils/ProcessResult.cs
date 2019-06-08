@@ -1,5 +1,6 @@
 ﻿using iText.IO.Image;
 using iText.Kernel.Pdf;
+using Newtonsoft.Json;
 using PDFIndexer.Base;
 using PDFIndexer.CommomModels;
 using PDFIndexer.Services;
@@ -7,20 +8,19 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace PDFIndexer.Utils
 {
-    static class ProcessResult
+    public static class ProcessResult
     {
         private static string rawTempPath = Config.TemporatyPath;
         private static string tempPath = rawTempPath + @"\out.pdf";
-        private static string gsPath = Path.Combine(Environment.CurrentDirectory,@"Ghost\gswin64c.exe");
+        private static string gsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Ghost\gswin64c.exe");
 
 
-
-
-        public static List<SampleObject> ProcessResults(IEnumerable<IndexMetadata> results, string keyword)
+        public async static Task<List<SampleObject>> ProcessResults(IEnumerable<IndexMetadata> results, string keyword)
         {
             List<SampleObject> list = new List<SampleObject>();
 
@@ -35,6 +35,8 @@ namespace PDFIndexer.Utils
 
             //Delete pos process
             //DeleteFile(tempPath);
+
+            await Task.CompletedTask;
 
             return list;
         }
@@ -67,7 +69,7 @@ namespace PDFIndexer.Utils
             return objects;
         }
 
-        private static string GetPageImageUri(string document, int page )
+        private static string GetPageImageUri(string document, int page)
         {
             var container = ImageProcessing.GetContainer(Config.ImageStorageConn, "imagepdf");
             var blob = container.GetBlobReference($"{Path.GetFileNameWithoutExtension(document)}/page_{page}.jpg");
@@ -108,7 +110,7 @@ namespace PDFIndexer.Utils
             FileInfo f = new FileInfo(readerDoc);
 
             return ImageProcessing.UploadImages(pdfPageImageList, f.Name.Replace(".pdf", ""));
-        }   
+        }
 
         private static Stream CutImage(Stream _oldImage, float X, float Y, float W, float H)
         {
@@ -130,9 +132,11 @@ namespace PDFIndexer.Utils
             List<HighlightObject> list = new List<HighlightObject>();
             int LastPage = 1;
 
+            Debug.WriteLine(JsonConvert.SerializeObject(input.ListOfWords));
+
             foreach (var word in input.ListOfWords)
             {
-                if (keyword == word.Text)
+                if (keyword.ToLower() == word.Text.ToLower().TrimStart().TrimEnd())
                 {
                     if (word.page == LastPage)
                     {
@@ -141,35 +145,38 @@ namespace PDFIndexer.Utils
                     else
                     {
                         LastPage = word.page;
-                        wordPerPage.Add(words);
+                        wordPerPage.Add(new List<PdfMetadata>(words));
                         words.Clear();
                         words.Add(word);
                     }
                 }
             }
 
-            foreach (var item in wordPerPage)
+            //adding last list of words (last page)
+            wordPerPage.Add(new List<PdfMetadata>(words));
+
+            foreach (var pages in wordPerPage)
             {
-                list.Add(new HighlightObject
+                foreach (var item in pages)
                 {
-                    Metadata = input,
-                    HighlightedWords = ConvertWord2BoundingBox(item),
-                    Keyword = keyword,
-                    PageNumber = item[0].page
-                });
+                    list.Add(new HighlightObject
+                    {
+                        Metadata = input,
+                        HighlightedWords = ConvertWord2BoundingBox(item),
+                        Keyword = keyword,
+                        PageNumber = item.page
+                    });
+                }
             }
 
             return list;
         }
 
-        private static List<BoundingBox> ConvertWord2BoundingBox(List<PdfMetadata> words)
+        private static List<BoundingBox> ConvertWord2BoundingBox(PdfMetadata word)
         {
             List<BoundingBox> list = new List<BoundingBox>();
 
-            foreach (var word in words)
-            {
-                list.Add(new BoundingBox { X = word.X, Y = word.Y, Height = word.Height, Width = word.Width });
-            }
+            list.Add(new BoundingBox { X = word.X, Y = word.Y, Height = word.Height, Width = word.Width });
 
             return list;
         }

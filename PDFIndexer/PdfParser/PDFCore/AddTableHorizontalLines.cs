@@ -7,7 +7,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class AddTableHorizontalLines : IProcessBlock
+    public class AddTableHorizontalLines : IProcessBlock
     {
         private List<IBlock> _lines;
         private List<IBlock> _background;

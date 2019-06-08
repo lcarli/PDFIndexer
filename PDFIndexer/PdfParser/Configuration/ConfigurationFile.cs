@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.Configuration
 {
-    class ConfigurationFile : IConfigurationStore
+    public class ConfigurationFile : IConfigurationStore
     {
         public string Get(string filename)
         {

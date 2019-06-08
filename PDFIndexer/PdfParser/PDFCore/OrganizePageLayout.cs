@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class OrganizePageLayout : IProcessBlock, IRetrieveStatistics
+    public class OrganizePageLayout : IProcessBlock, IRetrieveStatistics
     {
         const float MAX_PAGE_WIDTH_DIFFERENCE = 8f;
         const float HORIZONTAL_LINE_HEIGHT = 5f;

@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveTableOverImage : IProcessBlock
+    public class RemoveTableOverImage : IProcessBlock
     {
         private List<IBlock> _images;
         private IBlock _headerImage;

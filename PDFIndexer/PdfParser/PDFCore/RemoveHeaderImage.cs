@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveHeaderImage : IProcessBlock, IValidateBlock
+    public class RemoveHeaderImage : IProcessBlock, IValidateBlock
     {
         const float statRegionTooLarge = 200f;
         private List<IBlock> _images;

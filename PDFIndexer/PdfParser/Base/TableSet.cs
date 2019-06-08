@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class TableSet : IBlock, IEnumerable<IBlock>
+    public class TableSet : IBlock, IEnumerable<IBlock>
     {
         List<IBlock> _blockList = new List<IBlock>();
 

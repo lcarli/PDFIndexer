@@ -7,7 +7,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Parser
 {
-    class AfterFilterTextSegments : IAggregateStructure<TextSegment, TextSegment>
+    public class AfterFilterTextSegments : IAggregateStructure<TextSegment, TextSegment>
     {        
         public bool Aggregate(TextSegment line)
         {

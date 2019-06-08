@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class TableCell : IBlock
+    public class TableCell : IBlock
     {
         const float DARKCOLOR_THRESHOLD = 0.5f;
         public static bool HasDarkColor(TableCell t) => (t.BgColor < DARKCOLOR_THRESHOLD);

@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace PDFIndexer.Parser
 {
-    class TransformConteudo2 : IAggregateStructure<TextSegment, Conteudo>
+    public class TransformConteudo2 : IAggregateStructure<TextSegment, Conteudo>
     {
         int count = 0;
         public bool Aggregate(TextSegment line)

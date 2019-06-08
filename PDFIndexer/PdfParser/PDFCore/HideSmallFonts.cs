@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class HideSmallFonts : IProcessBlock, IValidateBlock
+    public class HideSmallFonts : IProcessBlock, IValidateBlock
     {
         const float CONSIDERED_SMALL_FONTSIZE = 1f;
         const float SAME_LINE_SMALL_FONTSIZE = 0.1f;

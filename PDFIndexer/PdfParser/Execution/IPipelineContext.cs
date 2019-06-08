@@ -5,10 +5,10 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Execution
 {
-    interface IPipelineContext
+    public interface IPipelineContext
     {
     }
-    interface IPipelinePdfContext : IPipelineContext
+    public interface IPipelinePdfContext : IPipelineContext
     {
         PipelineInputPdf.PipelineInputPdfPage CurrentPage { get; }
 

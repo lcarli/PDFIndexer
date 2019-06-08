@@ -9,7 +9,7 @@ namespace PDFIndexer.PDFCore
 {
     // the same implementation as AddTableHorizontalLines
     // but it does not require the line in the footer
-    class AddTableHorizontalLines2 : IProcessBlock
+    public class AddTableHorizontalLines2 : IProcessBlock
     {
         private List<IBlock> _lines;
         private List<IBlock> _background;

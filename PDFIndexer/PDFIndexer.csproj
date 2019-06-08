@@ -5,6 +5,17 @@
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject>PDFIndexer.Program</StartupObject>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>lcarli, fcatae</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/lcarli/PDFIndexer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lcarli/PDFIndexer</RepositoryUrl>
+    <PackageIconUrl>https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png</PackageIconUrl>
+    <Version>1.2.1</Version>
+    <NeutralLanguage />
+    <PackageTags>C# PDF</PackageTags>
+    <PackageId>PDFParser-CSharp</PackageId>
+    <Product>PDFParser-CSharp</Product>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.CommomModels
 {
-    class PdfMetadata
+    public class PdfMetadata
     {
         public string Text { get; set; }
         public float X { get; set; }

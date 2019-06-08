@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace PDFIndexer.Parser
 {
-    class TransformArtigo
+    public class TransformArtigo
     {
         public IEnumerable<Artigo> Create(IList<Conteudo> conteudos)
         {

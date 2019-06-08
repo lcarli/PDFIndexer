@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PDFIndexer.PDFCore
 {
-    class FindDouHeaderFooter : IProcessBlock
+    public class FindDouHeaderFooter : IProcessBlock
     {
         private readonly HeaderFooterData _headerFooterData;
         private readonly BlockPage _lines;

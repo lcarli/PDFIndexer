@@ -6,7 +6,7 @@ using System.IO;
 
 namespace PDFIndexer.TextStructures
 {
-    class AnalyzePageInfo<T> : ILogStructure2<T>
+    public class AnalyzePageInfo<T> : ILogStructure2<T>
     {
         ITransformIndexTree _index;
         int _structureId = 0;

@@ -1,0 +1,80 @@
+﻿@using PDFIndexer.CommomModels;
+@using System.IO;
+
+@model List<SampleObject>
+
+
+@{
+    ViewData["Title"] = "PDF Search";
+
+    var type = (string)TempData["_alert.type"];
+    var title = (string)TempData["_alert.title"];
+    var body = (string)TempData["_alert.body"];
+
+}
+
+
+<head>
+    <link rel="stylesheet" href="~/css/CropContainercss.css" />
+</head>
+
+<div class="pull-right">You have @ViewData["countFiles"] files</div>
+@if (Model != null)
+{
+    <br />
+    <div class="pull-right">We found @Model.Count files</div>
+}
+
+@if (!string.IsNullOrEmpty(type))
+{
+    <div class="alert alert-@type alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>@title</strong> @body
+    </div>
+}
+
+<br />
+<br />
+
+
+<form class="form-wrapper cf" asp-action="Index" asp-controller="Home" method="post" role="form">
+    <div class="form-group">
+        <input id="text" name="text" type="text" placeholder="Search here... (Ex.: banana)" required style="color: black">
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+
+<br />
+<br />
+
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+
+        //Calculations
+        float offset = ((@item.HighlightObject.HighlightedWords[0].Y / 1693) * 100) + 10;
+        float wordWidth = @item.HighlightObject.HighlightedWords[0].Width;
+        float wordHeight = @item.HighlightObject.HighlightedWords[0].Height;
+        float wordX = @item.HighlightObject.HighlightedWords[0].X;
+
+
+
+        float wordY = (2395 - (2395 * ((@item.HighlightObject.HighlightedWords[0].Y / 2395) + 0.1f)));
+
+
+
+        <div class="col-md-12">
+            <div>@System.IO.Path.GetFileNameWithoutExtension(item.Metadata.PDFURI)</div>
+            <div style="border: #286090 solid 2px;">
+                <div class="stretchy-wrapper" style="padding-bottom: 20%;">
+                    <div class="resultDescription" style="border: solid; border-width: 0px; background-image:url('@item.ImageUri'); background-size:100%; background-position-y: @offset.ToString().Replace(",",".")%; overflow: hidden;">
+                        <div class="highlight" style="position: absolute; width: @wordWidth.ToString().Replace(",",".")px; height: @wordHeight.ToString().Replace(",",".")px; left: @wordX.ToString().Replace(",",".")px; top: @wordY.ToString().Replace(",",".")px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

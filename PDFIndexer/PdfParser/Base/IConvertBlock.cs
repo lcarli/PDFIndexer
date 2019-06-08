@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IConvertBlock
+    public interface IConvertBlock
     {
         IEnumerable<TextLine> ProcessPage(int pageNumber, BlockPage page);
     }

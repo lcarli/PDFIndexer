@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class SetIdentifyTablesCompatibility : IProcessBlock
+    public class SetIdentifyTablesCompatibility : IProcessBlock
     {
         private readonly IdentifyTables _pre;
         private readonly IdentifyTablesData _data;

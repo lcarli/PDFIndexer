@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class StatsPageLayout
+    public class StatsPageLayout
     {
         public string Layout;
         public override string ToString()

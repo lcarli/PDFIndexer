@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.TextStructures
 {
-    class CreateStructures : IAggregateStructure<TextLine, TextStructure>
+    public class CreateStructures : IAggregateStructure<TextLine, TextStructure>
     {
         const float FLOATING_TEXT_RIGHT = 10f;
         const float MAXIMUM_CENTER_DIFFERENCE = 1f;

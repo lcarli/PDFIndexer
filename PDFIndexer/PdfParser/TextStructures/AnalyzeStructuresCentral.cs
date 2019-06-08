@@ -6,7 +6,7 @@ using System.IO;
 
 namespace PDFIndexer.TextStructures
 {
-    class AnalyzeStructuresCentral : ILogStructure<TextStructure>
+    public class AnalyzeStructuresCentral : ILogStructure<TextStructure>
     {
         public void StartLog(TextWriter input)
         {

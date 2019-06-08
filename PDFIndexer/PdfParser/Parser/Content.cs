@@ -5,7 +5,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Parser
 {
-    class Content : TextStructure
+    public class Content : TextStructure
     {
         public TipoDoConteudo ContentType { get; set; }
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IExecutionConfiguration
+    public interface IExecutionConfiguration
     {
         void Init(string filename);
     }

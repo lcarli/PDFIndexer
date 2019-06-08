@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class ShowBlocksets : IProcessBlock
+    public class ShowBlocksets : IProcessBlock
     {
         public BlockPage Process(BlockPage page2)
         {

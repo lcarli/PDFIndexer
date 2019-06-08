@@ -7,7 +7,7 @@ using System.IO;
 
 namespace PDFIndexer.ExecutionStats
 {
-    abstract class PrintAnalytics
+    public abstract class PrintAnalytics
     {
         public virtual void StartLog(TextWriter file)
         {

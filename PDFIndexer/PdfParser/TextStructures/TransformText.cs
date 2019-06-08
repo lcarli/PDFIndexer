@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PDFIndexer.TextStructures
 {
-    class TransformText<T, TI, TO>
+    public class TransformText<T, TI, TO>
         where T: class, IAggregateStructure<TI,TO>
     {
         List<TI> _input;

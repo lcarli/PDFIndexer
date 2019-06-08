@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface ILogStructurePdf<T>
+    public interface ILogStructurePdf<T>
     {
         void StartLogPdf(IPipelineDebug pipeline);
         void LogPdf(IPipelineDebug pipeline, T data);

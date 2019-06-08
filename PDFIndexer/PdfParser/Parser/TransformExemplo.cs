@@ -12,7 +12,7 @@ namespace PDFIndexer.Parser
     // TODO: rewrite using IFilterStructure
     //
     //
-    class TransformExemplo : IAggregateStructure<TextStructure, TextStructure>
+    public class TransformExemplo : IAggregateStructure<TextStructure, TextStructure>
     {
         public bool Aggregate(TextStructure line)
         {

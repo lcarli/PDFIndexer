@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class OrderBlocksets : IProcessBlock
+    public class OrderBlocksets : IProcessBlock
     {
         const float VERTICAL_DIFFERENCE = 4f;
         int VERTICAL_DIFFERENCE_INT = 1;

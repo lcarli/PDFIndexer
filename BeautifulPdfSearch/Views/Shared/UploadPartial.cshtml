@@ -1,0 +1,19 @@
+﻿
+    <div class="modal fade" id="ModalUpload">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background: #555 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpi/P//PwM6YGLAAuCCmpqacC2MRGsHCDAA+fIHfeQbO8kAAAAASUVORK5CYII=)">
+                <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" style="color:white">×</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" style="color:white">Upload PDFs</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" name="files" multiple />
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Upload" style="color:black" />
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->

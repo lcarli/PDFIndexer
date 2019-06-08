@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PDFIndexer.TextStructures
 {
-    class AnalyzeSegmentStats : ILogStructure<TextSegment>
+    public class AnalyzeSegmentStats : ILogStructure<TextSegment>
     {
         class TitleStats
         {

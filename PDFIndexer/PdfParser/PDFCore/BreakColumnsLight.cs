@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class BreakColumnsLight : IProcessBlock, IValidateBlock
+    public class BreakColumnsLight : IProcessBlock, IValidateBlock
     {
         public BlockPage Process(BlockPage page)
         {

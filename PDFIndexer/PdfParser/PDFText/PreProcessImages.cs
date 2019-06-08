@@ -10,7 +10,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFText
 {
-    class PreProcessImages : IEventListener, IPipelineResults<BlockPage>
+    public class PreProcessImages : IEventListener, IPipelineResults<BlockPage>
     {
         private PDFCore.ProcessImageData _processImageData;
 

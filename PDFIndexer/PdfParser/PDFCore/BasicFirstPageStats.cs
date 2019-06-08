@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class BasicFirstPageStats : IProcessBlock
+    public class BasicFirstPageStats : IProcessBlock
     {
         public float MinX { get; private set; }
         public float MaxX { get; private set; }

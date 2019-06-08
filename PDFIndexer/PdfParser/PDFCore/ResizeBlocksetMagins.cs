@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class ResizeBlocksetMagins : IProcessBlock
+    public class ResizeBlocksetMagins : IProcessBlock
     {
         const float MAX_PAGE_WIDTH_DIFFERENCE = 8f;
         private readonly BasicFirstPageStats _basicStats;

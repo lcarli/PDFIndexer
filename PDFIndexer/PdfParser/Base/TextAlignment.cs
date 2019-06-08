@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    enum TextAlignment
+    public enum TextAlignment
     {
         CENTER,
         LEFT,

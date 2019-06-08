@@ -259,3 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/BeautifulPdfSearch/lucene_index/_0.si
+/BeautifulPdfSearch/lucene_index/_0.cfs
+/BeautifulPdfSearch/lucene_index/_0.cfe
+/BeautifulPdfSearch/lucene_index/segments_2
+/BeautifulPdfSearch/lucene_index/segments.gen

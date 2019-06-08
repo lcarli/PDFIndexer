@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class BlocksetData : IProcessBlockData
+    public class BlocksetData : IProcessBlockData
     {
         private BlockPage2 _blocksetInfo;
 

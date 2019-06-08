@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IBlock
+    public interface IBlock
     {
         string GetText();
         float GetX();

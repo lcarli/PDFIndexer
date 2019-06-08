@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveFooter : IProcessBlock, IValidateBlock, IRetrieveStatistics
+    public class RemoveFooter : IProcessBlock, IValidateBlock, IRetrieveStatistics
     {
         const float statRegionTooLarge = 200f;
         StatsPageFooter _stats = new StatsPageFooter();

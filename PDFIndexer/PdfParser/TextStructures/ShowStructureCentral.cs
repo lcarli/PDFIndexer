@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.TextStructures
 {
-    class ShowStructureCentral : ILogStructurePdf<TextStructure>
+    public class ShowStructureCentral : ILogStructurePdf<TextStructure>
     {
         public void EndLogPdf(IPipelineDebug pipeline)
         {

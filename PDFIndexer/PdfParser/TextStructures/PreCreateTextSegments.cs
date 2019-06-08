@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.TextStructures
 {
-    class PreCreateTextSegments : IAggregateStructure<TextStructure, TextStructureAgg>
+    public class PreCreateTextSegments : IAggregateStructure<TextStructure, TextStructureAgg>
     {
         const float ERR_ALIGNMENT = 1f;
 

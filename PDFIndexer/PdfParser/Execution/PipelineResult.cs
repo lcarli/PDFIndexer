@@ -5,7 +5,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Execution
 {
-    interface IPipelineResults<T>
+    public interface IPipelineResults<T>
     {
         T GetResults();
     }

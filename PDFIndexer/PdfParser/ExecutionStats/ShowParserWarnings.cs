@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.ExecutionStats
 {
-    class ShowParserWarnings
+    public class ShowParserWarnings
     {
         public IEnumerable<int> GetPages(PipelineStats statistics)
         {

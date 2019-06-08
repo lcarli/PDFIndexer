@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.Configuration
 {
-    class ParserTreeConfig : IExecutionConfiguration
+    public class ParserTreeConfig : IExecutionConfiguration
     {
         List<string> _titles;
         public bool IsValid { get; private set; }

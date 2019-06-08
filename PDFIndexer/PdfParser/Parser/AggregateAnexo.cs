@@ -7,7 +7,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Parser
 {
-    class AggregateAnexo : IAggregateStructure<Conteudo, Conteudo>
+    public class AggregateAnexo : IAggregateStructure<Conteudo, Conteudo>
     {
         public bool Aggregate(Conteudo line)
         {

@@ -5,7 +5,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Parser
 {
-    class Conteudo
+    public class Conteudo
     {
         //For internal use
         public int IntenalId { get; set; }

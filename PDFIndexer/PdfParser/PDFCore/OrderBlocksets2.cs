@@ -8,7 +8,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class OrderBlocksets2 : IProcessBlock
+    public class OrderBlocksets2 : IProcessBlock
     {
         private List<Data> Values { get; set; }
         private List<Data> ValuesY { get; set; }

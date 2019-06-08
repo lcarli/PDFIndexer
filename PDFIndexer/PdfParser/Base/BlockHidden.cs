@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockHidden : Block
+    public class BlockHidden : Block
     {
         public string GetHiddenText()
         {

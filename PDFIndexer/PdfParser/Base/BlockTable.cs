@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockTable
+    public class BlockTable
     {
     }
 }

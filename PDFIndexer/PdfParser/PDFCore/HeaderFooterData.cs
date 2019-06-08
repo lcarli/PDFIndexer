@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PDFIndexer.PDFCore
 {
-    class HeaderFooterData : IProcessBlockData
+    public class HeaderFooterData : IProcessBlockData
     {
         public float HeaderH = float.NaN;
         public float FooterH = float.NaN;

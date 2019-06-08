@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class BreakColumnsRewrite : IProcessBlock, IValidateBlock
+    public class BreakColumnsRewrite : IProcessBlock, IValidateBlock
     {
         const float VERTICAL_MARGIN_DIFF = 1f;
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface IValidateMark
+    public interface IValidateMark
     {
         string Validate(BlockSet<MarkLine> marks);
     }

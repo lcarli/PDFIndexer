@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Execution
 {
-    class PipelineDisposeHelper : IDisposable
+    public class PipelineDisposeHelper : IDisposable
     {
         private List<IDisposable> _disposableObjects = new List<IDisposable>();
 

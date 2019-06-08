@@ -6,7 +6,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.PDFCore
 {
-    class DetectImplicitTable : IProcessBlock, IValidateBlock
+    public class DetectImplicitTable : IProcessBlock, IValidateBlock
     {
         public BlockPage Process(BlockPage page)
         {

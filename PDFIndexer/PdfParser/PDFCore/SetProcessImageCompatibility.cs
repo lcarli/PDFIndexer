@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class SetProcessImageCompatibility : IProcessBlock
+    public class SetProcessImageCompatibility : IProcessBlock
     {
         private readonly PreProcessImages _pre;
         private readonly ProcessImageData _data;

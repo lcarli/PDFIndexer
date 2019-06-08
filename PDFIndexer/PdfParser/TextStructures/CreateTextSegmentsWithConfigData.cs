@@ -8,7 +8,7 @@ using PDFIndexer.Configuration;
 
 namespace PDFIndexer.Parser
 {
-    class CreateTextSegmentsWithConfigData : IAggregateStructure<TextStructure, TextSegment>
+    public class CreateTextSegmentsWithConfigData : IAggregateStructure<TextStructure, TextSegment>
     {        
         private IList<string> _parserTitles;
         private int _parserTitleStart;

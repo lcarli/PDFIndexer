@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.Execution
 {
-    class PipelineInputCache<TD> where TD: class
+    public class PipelineInputCache<TD> where TD: class
     {
         Dictionary<Type, Document> _dictDocuments = new Dictionary<Type, Document>();
         int _numberOfPages = -1;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Parser
 {
-    class Metadados
+    public class Metadados
     {
         public string Nome { get; set; }
         public string SecaoDoDiario { get; set; }

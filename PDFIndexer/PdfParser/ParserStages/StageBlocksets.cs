@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PDFIndexer.ParserStages
 {
-    class StageBlocksets
+    public class StageBlocksets
     {
         private readonly StageContext _context;
 

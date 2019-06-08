@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PDFIndexer.PdfParser.TextStructures
 {
-    class CreateWordBlock : IConvertBlock
+    public class CreateWordBlock : IConvertBlock
     {
         public IEnumerable<TextLine> ProcessPage(int pageNumber, BlockPage page)
         {

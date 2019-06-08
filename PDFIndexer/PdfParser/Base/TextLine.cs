@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class TextLine : IBlock
+    public class TextLine : IBlock
     {
         public string FontName { get; set; }
         public float FontSize { get; set; }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class PdfReaderException : Exception
+    public class PdfReaderException : Exception
     {
         public PdfReaderException(string message, string detailed) : base(detailed)
         {

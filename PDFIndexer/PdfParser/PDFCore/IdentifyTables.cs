@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class IdentifyTables : IProcessBlock
+    public class IdentifyTables : IProcessBlock
     {
         const float MINIMUM_BACKGROUND_SIZE = 5f;
         const float MAXIMUM_LIZE_WIDTH = 2f;

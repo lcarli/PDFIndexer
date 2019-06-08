@@ -17,7 +17,8 @@ namespace PDFIndexer.Services
         {
 
             if (!File.Exists(gstPath)) throw new Exception($"Ghost Script not found! {gstPath}");
-            if (!Directory.Exists(tempFolder)) throw new Exception($"Ghost Script not found! {gstPath}");
+            //if (!Directory.Exists(tempFolder)) throw new Exception($"Ghost Script not found! {gstPath}");
+            Directory.CreateDirectory(tempFolder);
 
             _gsPath = gstPath;
             _tempFolder = tempFolder;

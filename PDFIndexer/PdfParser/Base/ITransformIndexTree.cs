@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    interface ITransformIndexTree
+    public interface ITransformIndexTree
     {
         int FindPageStart<T>(T instance);
     }

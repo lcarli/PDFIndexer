@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class HighlightTextTable : IProcessBlock, IValidateBlock
+    public class HighlightTextTable : IProcessBlock, IValidateBlock
     {
         const float MINIMUM_BACKGROUND_SIZE = 5f;
 

@@ -7,7 +7,7 @@ using PDFIndexer.Base;
 
 namespace PDFIndexer.Parser
 {
-    class CreateTextLineIndex : IAggregateStructure<TextLine, TextLine>
+    public class CreateTextLineIndex : IAggregateStructure<TextLine, TextLine>
     {
         // this class does nothing
         // however, it indirectly creates an index for TextLine

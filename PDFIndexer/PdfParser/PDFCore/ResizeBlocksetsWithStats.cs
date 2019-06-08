@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class ResizeBlocksetsWithStats : IProcessBlock
+    public class ResizeBlocksetsWithStats : IProcessBlock
     {
         private readonly BasicFirstPageStats _basicStats;
 

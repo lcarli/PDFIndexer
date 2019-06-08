@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PDFIndexer.TextStructures
 {
-    class CreateContent : IAggregateStructure<TextSegment, TextSegment>
+    public class CreateContent : IAggregateStructure<TextSegment, TextSegment>
     {
         public CreateContent(BasicFirstPageStats basicFirstPageStats, PipelinePageStats<int> teste, PipelineDocumentStats docstats)
         {

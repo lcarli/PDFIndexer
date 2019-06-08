@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFIndexer.Base
 {
-    class BlockColumn : BlockSet<IBlock>
+    public class BlockColumn : BlockSet<IBlock>
     {
         private int _columnType;
         public int X1;

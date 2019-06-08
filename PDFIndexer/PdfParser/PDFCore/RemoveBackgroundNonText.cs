@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PDFIndexer.PDFCore
 {
-    class RemoveBackgroundNonText : IProcessBlock
+    public class RemoveBackgroundNonText : IProcessBlock
     {
         const float MINIMUM_BACKGROUND_SIZE = 5f;
 
